@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Coupons{% endblock %}
+
+{% block body %}
+    <h1>Create new Coupons</h1>
+
+    {{ include('coupons/_form.html.twig') }}
+
+    <a href="{{ path('coupons_index') }}">back to list</a>
+{% endblock %}

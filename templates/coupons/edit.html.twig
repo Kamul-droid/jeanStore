@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Coupons{% endblock %}
+
+{% block body %}
+    <h1>Edit Coupons</h1>
+
+    {{ include('coupons/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('coupons_index') }}">back to list</a>
+
+    {{ include('coupons/_delete_form.html.twig') }}
+{% endblock %}
