@@ -1,19 +1,346 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {# Run `composer require symfony/webpack-encore-bundle`
-           and uncomment the following Encore helpers to start using Symfony UX #}
-        {% block stylesheets %}
-            {#{{ encore_entry_link_tags('app') }}#}
-        {% endblock %}
 
-        {% block javascripts %}
-            {#{{ encore_entry_script_tags('app') }}#}
-        {% endblock %}
-    </head>
-    <body>
-        {% block body %}{% endblock %}
-    </body>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="Anil z" name="author">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Site de ventes de produits de la mode et des vêtements">
+    <meta name="keywords" content="vente, achat, habits, vetement, pantalon, chaussure, style, mode, tendance, glamour,chic">
+
+    <!-- SITE TITLE -->
+    <title>{% block title %}Jean Store{% endblock %}</title>
+
+    {% block stylesheets %}
+
+    <!-- Favicon Icon -->
+    {# <link rel="shortcut icon" type="image/x-icon" href="{{ asset('deco/assets/images/#') }}"> #}
+    <!-- Animation CSS -->
+    <link rel="stylesheet" href="{{ asset('deco/assets/css/animate.css') }}">
+    <!-- Latest Bootstrap min CSS -->
+    <link rel="stylesheet" href="{{ asset('deco/assets/bootstrap/css/bootstrap.min.css') }}"> {#cookie consent#}
+
+    <link rel="stylecookie" href="{{ asset('deco/assets/bootstrap/css/cookieconsent.css') }}">
+
+
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css?family=Oswald:200,300,400,500,600,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&display=swap" rel="stylesheet">
+    <!-- Icon Font CSS -->
+    <link rel="stylesheet" href="{{ asset('deco/assets/css/ionicons.min.css') }}">
+    <!-- FontAwesome CSS -->
+    <link rel="stylesheet" href="{{ asset('deco/assets/css/all.min.css') }}">
+    <!-- Flaticon Font CSS -->
+    <link rel="stylesheet" href="{{ asset('deco/assets/css/flaticon.css') }}">
+    <!-- Themify Font CSS -->
+    <link rel="stylesheet" href="{{ asset('deco/assets/css/themify-icons.css') }}">
+    <!--- owl carousel CSS-->
+    <link rel="stylesheet" href="{{ asset('deco/assets/owlcarousel/css/owl.carousel.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('deco/assets/owlcarousel/css/owl.theme.css') }}">
+    <link rel="stylesheet" href="{{ asset('deco/assets/owlcarousel/css/owl.theme.default.min.css') }}">
+    <!-- Magnific Popup CSS -->
+    <link rel="stylesheet" href="{{ asset('deco/assets/css/magnific-popup.css') }}">
+    <!-- jquery-ui CSS -->
+    <link rel="stylesheet" href="{{ asset('deco/assets/css/jquery-ui.css') }}">
+    <!-- Style CSS -->
+    <link rel="stylesheet" href="{{ asset('deco/assets/css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('deco/assets/css/responsive.css') }}">
+    <link rel="stylesheet" id="layoutstyle" href="{{ asset('deco/assets/color/theme-bluelight.css') }}"> {% endblock %}
+
+</head>
+
+<body>
+
+
+    <!-- START HEADER -->
+    <header class="header_wrap dark_skin main_menu_uppercase main_menu_weight_600 menu_style1">
+        <div class="top-header bg_dark light_skin">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-md-8">
+                        <ul class="contact_detail list_none text-center text-md-left">
+                            <li><i class="ti-mobile"></i><span>+33(0) 000 000 000 </span></li>
+                            <li><i class="ti-location-pin"></i><span> JeanStore Place du style</span></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-4">
+                        <ul class="list_none social_icons text-center social_white text-md-right mt-2 mt-md-0">
+                            <li><a href="#"><i class="ion-social-facebook"></i></a></li>
+                            <li><a href="#"><i class="ion-social-twitter"></i></a></li>
+                            <li><a href="#"><i class="ion-social-googleplus"></i></a></li>
+                            <li><a href="#"><i class="ion-social-youtube-outline"></i></a></li>
+                            <li><a href="#"><i class="ion-social-instagram-outline"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <nav class="navbar navbar-expand-lg">
+                <a class="navbar-brand" href="{{ path('index') }}">
+                    {# <img class="logo_light" src="{{ asset('deco/assets/images/#') }}" alt="logo" />
+                    <img class="logo_dark" src="{{ asset('deco/assets/images/#') }}" alt="logo" />
+                    <img class="logo_default" src="{{ asset('deco/assets/images/#') }}" alt="logo" /> #}
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"> <span class="ion-android-menu"></span> </button>
+                <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+                    <ul class="navbar-nav">
+
+                        <li>
+                            <a class="nav-link active" href="{{ path('index') }}"> {% trans %}Accueil{% endtrans %} </a>
+                        </li>
+                       
+                        <li>
+                            <a class="nav-link" href="{{ path('about') }}">{% trans %}Qui sommes-nous{% endtrans %} </a>
+
+                        </li>
+                        <li>
+                            <a class="nav-link" href="{{ path('contact') }}">{% trans %}Contact{% endtrans %} </a>
+                        </li>
+                        <li class="dropdown">
+                        <a class="dropdown-toggle nav-link" href="#" data-toggle="dropdown">Compte</a>
+                            <div class="dropdown-menu">
+                                <ul> 
+                                    
+                                     
+                                    {% if is_granted('ROLE_ADMIN') %}
+       
+                                        <li>
+                                        
+                                        
+                                        {# Role admin #}
+                                        <a class=" nav-link nav_item " href="{{ path('admin_index') }}">Admin</a>
+                                        </li>
+                                    {% endif %}
+                                    {% if is_granted('ROLE_EDITOR') %}
+                                        <li>
+                                        <a class=" nav-link nav_item " href="">{{ app.user.username }}</a>  
+
+                                        </li>
+                                    
+                                        <li>
+                                            <a class=" nav-link nav_item " href="{{ path('boutique') }}">{% trans %}Commande{% endtrans %}</a>  
+                                        </li>
+                                        <li>
+                                            <a class="ndropdown-item nav-link nav_item " href="{{ path('app_logout') }}">{% trans %}Deconnexion{% endtrans %}</a>  
+
+
+                                        </li>
+                                        
+                                    {% else %}
+                                    
+                                        <li>
+                                            {# Connexion #}
+                                            <a class="dropdown-item nav-link nav_item" href="{{ path('app_login') }}">{% trans %}Connexion {% endtrans %}</a>  
+
+
+                                        </li>
+                                        
+                                    {% endif %}
+                                    
+                                </ul>
+                            </div>
+                        </li>
+                        
+                    </ul>
+                </div>
+                <ul class="navbar-nav attr-nav align-items-center">
+                    
+                    <li><a href="javascript:void(0);" class="nav-link search_trigger"><i class="ion-ios-search-strong"></i></a>
+                        <div class="search-overlay">
+                            <div class="search_wrap">
+                                <form>
+                                    <div class="rounded_input">
+                                        <input type="text" placeholder="Search" class="form-control" id="search_input">
+                                    </div>
+                                    <button type="submit" class="search_icon"><i class="fas fa-search"></i></button>
+                                </form>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        {# changement de langue #} {% for locale in locales %} {% if locale != app.request.locale %}
+                        <a class="nav-link active" href="{{ path('langchange', {'locale': locale}) }}">{{ locale }}</a> {% endif %} {% endfor %}
+
+
+                    </li>
+
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <!-- END HEADER -->
+
+    {# message de confirmation #} {%for label, messages in app.flashes%}
+    <div class="container">
+        <div class="alert alert-{{label}}">
+            {% for message in messages %}
+
+            <p>{{message}}</p>
+
+            {% endfor %}
+        </div>
+
+    </div>
+    {% endfor %}
+   
+{% block body %} {% endblock %}
+
+    <!-- START FOOTER -->
+    <footer class="footer_dark background_bg overlay_bg_80" data-img-src="{#{ asset('deco/assets/images/footer_bg2.jpg') }#}">
+        <div class="top_footer">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-3 col-sm-7">
+                        <div class="footer_logo">
+                            <a href="index.html"><img alt="logo" src="{#{ asset('deco/assets/images/#') }#}"></a>
+                        </div>
+                        <div class="footer_desc">
+                            <p>{% trans %} Avertissement : Nos produits sont certifiés 100 % écologiques{%
+                                endtrans %} </p>
+                            <ul class="contact_info list_none">
+                                <li>
+                                    <span class="fa fa-map-marker-alt "></span>
+                                    <address> JeanStore rue de la vente </address>
+                                </li>
+                                <li>
+                                    <span class="fa fa-mobile-alt" id="num"></span>
+                                    <p>000 000 0000 000 111</p>
+                                </li>
+                                <li>
+                                    <span class="fa fa-envelope" id="info"></span>
+                                    <a href="mailto:#">Contact JeanStore</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-sm-5">
+                        <h5 class="widget_title3">{% trans %}Accès Rapide {% endtrans %}</h5>
+                        <ul class="list_none widget_links links_style2">
+                            <li><a href="{{ path('about') }}">{% trans %}Qui sommes-nous {% endtrans %}</a></li>
+                            <li><a href="#info">{% trans %}Retour {% endtrans %}</a></li>
+                            <li><a href="{{ path('contact') }}">{% trans %}Contact {% endtrans %}</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-3 col-md-7">
+                        <h5 class="widget_title3">{% trans %}Dernier Ajout {% endtrans %}</h5>
+                        <ul class="recent_post border_bottom_dash list_none">
+                            <li>
+                                <div class="post_footer">
+                                    <div class="post_content">
+                                        <h6><a href="#">{% trans %}Un bon look, un bien être au quotidien. {% endtrans %}</a></h6>
+                                        <span class="post_date"><i class="ion-android-time"></i> {% trans %}Decembre 20, 2021 {% endtrans %}</span>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="post_footer">
+                                    <div class="post_content">
+                                        <h6><a href="#"> {% trans %} Le premier site en matière de mode.{% endtrans %}</a></h6>
+                                        <span class="post_date"><i class="ion-android-time"></i>{% trans %}Decembre 20, 2021 {% endtrans %}</span>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-4 col-md-5">
+                        <h5 class="widget_title3">Instagram</h5>
+                        <ul class="list_none instafeed">
+                            {# <li>
+                                <a href="#"><img src="{{ asset('deco/assets/images/insta_img1.jpg') }}" alt="insta_img"><span class="insta_icon"><i class="ti-instagram"></i></span></a>
+                            </li>
+                            <li>
+                                <a href="#"><img src="{{ asset('deco/assets/images/insta_img2.jpg') }}" alt="insta_img"><span class="insta_icon"><i class="ti-instagram"></i></span></a>
+                            </li>
+                            <li>
+                                <a href="#"><img src="{{ asset('deco/assets/images/insta_img3.jpg') }}" alt="insta_img"><span class="insta_icon"><i class="ti-instagram"></i></span></a>
+                            </li>
+                            <li>
+                                <a href="#"><img src="{{ asset('deco/assets/images/insta_img4.jpg') }}" alt="insta_img"><span class="insta_icon"><i class="ti-instagram"></i></span></a>
+                            </li>
+                            <li>
+                                <a href="#"><img src="{{ asset('deco/assets/images/insta_img5.jpg') }}" alt="insta_img"><span class="insta_icon"><i class="ti-instagram"></i></span></a>
+                            </li>
+                            <li>
+                                <a href="#"><img src="{{ asset('deco/assets/images/insta_img6.jpg') }}" alt="insta_img"><span class="insta_icon"><i class="ti-instagram"></i></span></a>
+                            </li>
+                            <li>
+                                <a href="#"><img src="{{ asset('deco/assets/images/insta_img7.jpg') }}" alt="insta_img"><span class="insta_icon"><i class="ti-instagram"></i></span></a>
+                            </li>
+                            <li>
+                                <a href="#"><img src="{{ asset('deco/assets/images/insta_img8.jpg') }}" alt="insta_img"><span class="insta_icon"><i class="ti-instagram"></i></span></a>
+                            </li> #}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-12">
+                    <div class="bottom_footer border_top_transparent">
+                        <div class="row">
+                            <div class="col-md-7">
+                                <p class="copyright m-md-0 text-center text-md-left">Copyright © <?php echo date("Y") ?> - Jean Store</p>
+                            </div>
+                            <div class="col-md-5">
+                                <ul class="list_none footer_link text-center text-md-right">
+                                    <li><a href="{{ path('politique') }}">{% trans %}Conditions Générales d'Utilisation {% endtrans %}</a></li>
+                                    <li><a href="{{ path('confidentialite') }}"> {% trans %}Politiques de Confidentialités {% endtrans %}</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- END FOOTER -->
+
+    <a href="#" class="scrollup" style="display: none;"><i class="ion-ios-arrow-up"></i></a> {% block javascripts %} {#cookie#}
+    <script src="{{ asset('deco/assets/js/cookieconsent.js') }}"></script>
+    <script src="{{ asset('deco/assets/js/scriptcookie.js') }}"></script>
+
+    <script src="{{ asset('deco/assets/js/jquery-1.12.4.min.js') }}"></script>
+    <!-- jquery-ui js -->
+    <script src="{{ asset('deco/assets/js/jquery-ui.js') }}"></script>
+    <!-- popper min js -->
+    <script src="{{ asset('deco/assets/js/popper.min.js') }}"></script>
+    <!-- Latest compiled and minified Bootstrap -->
+    <script src="{{ asset('deco/assets/bootstrap/js/bootstrap.min.js') }}"></script>
+    <!-- owl-carousel min js  -->
+    <script src="{{ asset('deco/assets/owlcarousel/js/owl.carousel.min.js') }}"></script>
+    <!-- magnific-popup min js  -->
+    <script src="{{ asset('deco/assets/js/magnific-popup.min.js') }}"></script>
+    <!-- waypoints min js  -->
+    <script src="{{ asset('deco/assets/js/waypoints.min.js') }}"></script>
+    <!-- parallax js  -->
+    <script src="{{ asset('deco/assets/js/parallax.js') }}"></script>
+    <!-- jquery dd js  -->
+    <script src="{{ asset('deco/assets/js/jquery.dd.min.js') }}"></script>
+    <!-- countdown js  -->
+    <script src="{{ asset('deco/assets/js/jquery.countdown.min.js') }}"></script>
+    <!-- jquery.counterup.min js -->
+    <script src="{{ asset('deco/assets/js/jquery.counterup.min.js') }}"></script>
+    <!-- jquery.parallax-scroll js -->
+    <script src="{{ asset('deco/assets/js/jquery.parallax-scroll.js') }}"></script>
+    <!-- fit video  -->
+    <script src="{{ asset('deco/assets/js/jquery.fitvids.js') }}"></script>
+    <!-- imagesloaded js -->
+    <script src="{{ asset('deco/assets/js/imagesloaded.pkgd.min.js') }}"></script>
+    <!-- isotope min js -->
+    <script src="{{ asset('deco/assets/js/isotope.min.js') }}"></script>
+    <!-- cookie js -->
+    <script src="{{ asset('deco/assets/js/js.cookie.js') }}"></script>
+    <!-- scripts js -->
+    <script src="{{ asset('deco/assets/js/scripts.js') }}"></script>
+    <script src="{{asset('deco/assets/js/image.js') }}"></script>
+    {% endblock %}
+
+</body>
+
 </html>

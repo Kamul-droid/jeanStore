@@ -1,0 +1,153 @@
+/*!
+Author       : Bestwebcreator.
+Template Name: Organiq - Organic Food HTML Template
+Version      : 1.0
+*/
+
+a:hover,
+.navbar .navbar-nav > li > a.active, 
+.navbar .navbar-nav > li:hover > a, 
+.light_skin.transparent_header.nav-fixed .navbar .navbar-nav > li > a.active, 
+.light_skin.transparent_header.nav-fixed .navbar .navbar-nav > li:hover > a,
+.dark_skin .navbar .navbar-nav .dropdown-menu li a.active, 
+.dark_skin .navbar .navbar-nav .dropdown-menu li a:hover, 
+.dark_skin .navbar .navbar-nav .dropdown-menu > ul > li:hover > a, 
+.dark_skin .navbar .navbar-nav .dropdown-menu > ul > .mega-menu-col ul > li:hover > a,
+.navbar .navbar-nav .dropdown-menu li a.active, 
+.navbar .navbar-nav .dropdown-menu li a:hover, 
+.navbar .navbar-nav .dropdown-menu > ul > li:hover > a, 
+.navbar .navbar-nav .dropdown-menu > ul > .mega-menu-col ul > li:hover > a,
+.top-header.light_skin .header_list li a:hover,
+.top-header.light_skin .contact_detail li a:hover,
+.icon_box i,
+.header_list > li .dropdown-item:hover,
+.custome_dropdown .ddChild li:hover,
+.contact_detail > li a:hover,
+.link_container a,
+.classes_schedule li i,
+.pricing_ribbon,
+.testi_user span, .author_intro span,
+.team_title span,
+.blog_meta li a:hover,
+.contact_info li span,
+.footer_dark .widget_links li a:hover, 
+.footer_dark .footer_link li a:hover, 
+.footer_dark .post_content h6 a:hover, 
+.footer_dark .contact_info a:hover,
+.footer_link li a:hover, 
+.widget_links li a:hover, 
+.contact_info li a:hover,
+.ripple,
+.event_meta li i,
+.social_white .social_icons li a:hover, .social_white.social_icons li a:hover,
+.title_icon,
+.nav-tabs .nav-link:hover, .nav-tabs .nav-link.active, .nav-tabs .nav-link.active:hover,
+.widget_categories a:hover,
+.search_form button:hover,
+.accordion .card-header a[aria-expanded="true"],
+.list_style_2 li::before,
+.cart_total .cart_amount,
+.post_nav a:hover .nav_meta {
+	color: #ffa02c;
+}
+
+.btn-white,
+.sub_heading,
+.text_default,
+.btn-outline-default {
+	color: #ffa02c !important;
+}
+
+.btn-default,
+.cart_count,
+.grid_filter li a.current, 
+.classes_filter li a.current,
+.owl-theme .owl-dots .owl-dot.active span,
+.owl-theme .owl-dots .owl-dot:hover span,
+.owl-theme .owl-nav [class*="owl-"],
+.contact_info.contact_info_style2 li span,
+.border_social .social_icons li a:hover, .border_social.social_icons li a:hover,
+.scrollup:hover,
+.menu_style1 .navbar .navbar-collapse .navbar-nav > li > a.active, .menu_style1 .navbar .navbar-collapse .navbar-nav > li:hover > a,
+.navbar-toggler,
+.title_icon::before,
+.title_icon::after,
+.event_box_style1 .event_date,
+.sliding_tab .tab_bg,
+.page-item.active .page-link, .page-item .page-link:hover,
+.sidebar .widget_title::before,
+.tags a:hover,
+.progress_content .progress-bar,
+.btn-outline-default:hover,
+.custome-radio input[type="radio"] + .form-check-label::after,
+.list_style_1 li::before,
+.tab-style2 .nav-item .nav-link.active,
+.post_navigation a:hover,
+.pr_flash,
+.filter_price .ui-slider .ui-slider-handle,
+.filter_price .ui-slider .ui-slider-range,
+.quantity .minus:hover, .quantity .plus:hover {
+	background-color: #ffa02c;
+}
+
+.bg_default {
+	background-color: #ffa02c !important;
+}
+
+.btn-default,
+.icon_box_style1::before,
+.icon_box_style1::after,
+.testimonial_style1 .testimonial_img::before,
+.owl-theme .owl-dots .owl-dot span,
+.border_social .social_icons li a:hover, .border_social.social_icons li a:hover,
+.page-item.active .page-link, .page-item .page-link:hover,
+.tags a:hover,
+.btn-outline-default,
+.custome-checkbox input[type="checkbox"] + .form-check-label::after,
+.custome-checkbox input[type="checkbox"]:checked + .form-check-label::before,
+.custome-radio input[type="radio"]:checked + .form-check-label::before,
+.tab-style1 .nav-tabs .nav-link.active, .tab-style1 .nav-tabs .nav-link.active:hover {
+	border-color: #ffa02c;
+}
+
+.btn-default:hover,
+.btn-default.focus, 
+.btn-default:focus,
+.owl-theme .owl-nav [class*="owl-"]:hover {
+	background-color: #df800c;
+}
+
+.btn-default:hover,
+.btn-default.focus, 
+.btn-default:focus {
+	border-color: #df800c;
+}
+
+.overlay_bg_default_90:before {
+	background-color: rgba(255, 160, 44, 0.90);
+}
+.overlay_bg_default_80:before,
+.pricing_style2:hover::before {
+	background-color: rgba(255, 160, 44, 0.80);
+}
+.overlay_bg_default_70:before {
+	background-color: rgba(255, 160, 44, 0.70);
+}
+.overlay_bg_default_60:before {
+	background-color: rgba(255, 160, 44, 0.60);
+}
+.overlay_bg_default_50:before {
+	background-color: rgba(255, 160, 44, 0.50);
+}
+.overlay_bg_default_40:before {
+	background-color: rgba(255, 160, 44, 0.40);
+}
+.overlay_bg_default_30:before {
+	background-color: rgba(255, 160, 44, 0.30);
+}
+.overlay_bg_default_20:before {
+	background-color: rgba(255, 160, 44, 0.20);
+}
+.overlay_bg_default_10:before {
+	background-color: rgba(255, 160, 44, 0.10);
+}
