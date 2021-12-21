@@ -1,4 +1,20 @@
-{{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
-{{ form_end(form) }}
+<section class="container">
+    {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <button class="btn">{{ button_label|default('Save') }}</button>
+    {{ form_end(form) }}
+     {# Vérifier si la route est " produit" on affiche les images#} {% if app.request.attributes.get('_route')=='products_edit' %}
+     <h2>Images</h2>
+            {% for image in product.images %}
+
+            <div class="container col md5">
+                <img src="{{asset('/uploads/' ~ image.link)}}" alt="article" width="150" , height="150">
+                <div class="btn btn-default">
+                    <a href="{{path('image_delete',{'id':image.id}) }}" data-delete data-token="{{ csrf_token('delete' ~ image.id) }}"> supprimer </a>
+                </div>
+
+            </div>
+
+            {% endfor %} {% endif %}
+</section>
+

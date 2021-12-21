@@ -2,26 +2,25 @@
 
 namespace App\Form;
 
-use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\FormBuilderInterface;
+use App\Entity\Image;
 use Symfony\Component\Form\AbstractType;
-use App\Entity\Coupons;
+use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class CouponsType extends AbstractType
+class Image1Type extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('code')
-            // ->add('value')
-            // ->add('status')
+            ->add('link')
+            ->add('product')
         ;
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => Coupons::class,
+            'data_class' => Image::class,
         ]);
     }
 }

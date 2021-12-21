@@ -2,14 +2,16 @@
 
 namespace App\Controller;
 
-use App\Entity\Products;
-use App\Form\ProductsType;
-use App\Repository\ProductsRepository;
-use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Doctrine\ORM\EntityManagerInterface;
+use App\Repository\ProductsRepository;
+use App\Form\ProductsType;
+use App\Form\ImageType;
+use App\Entity\Products;
+use App\Entity\Image;
 
 /**
  * @Route("/products")
@@ -32,10 +34,40 @@ class ProductsController extends AbstractController
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
         $product = new Products();
+       
+
         $form = $this->createForm(ProductsType::class, $product);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            $newImg = $form ->get('image')->getData();
+
+             // on boucle sur les images
+             foreach($newImg as $img){
+                // On génère un nouveau nom de fichier
+                $fichier = md5(uniqid()).'.'.$img->guessExtension();
+
+                //On copie le fichier dans le dossier indiqué
+                //move_uploaded_file($fichier,'images_directory');
+                $img->move($this->getParameter('images_directory'),$fichier);
+                
+                // On stocke l´image dans la base de données Articles
+                $Image = new Image();
+                $Image -> setLink($fichier);
+                $Image -> setProduct($product);
+                $product -> addImage($Image);
+
+            }
+              // recharge la page si le contenu n'est pas saisi
+              $formContent = $form->get('name')->getData();
+              $formContent1 = $form->get('price')->getData();
+            if(!$formContent && !$formContent1){
+              return $this->redirectToRoute('products_new', [], Response::HTTP_SEE_OTHER);
+            }
+            
+            $product->setCreatedAt(new \DateTimeImmutable('now'));
+
             $entityManager->persist($product);
             $entityManager->flush();
 

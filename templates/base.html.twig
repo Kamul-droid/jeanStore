@@ -150,18 +150,57 @@
                 </div>
                 <ul class="navbar-nav attr-nav align-items-center">
                     
-                    <li><a href="javascript:void(0);" class="nav-link search_trigger"><i class="ion-ios-search-strong"></i></a>
-                        <div class="search-overlay">
-                            <div class="search_wrap">
-                                <form>
-                                    <div class="rounded_input">
-                                        <input type="text" placeholder="Search" class="form-control" id="search_input">
-                                    </div>
-                                    <button type="submit" class="search_icon"><i class="fas fa-search"></i></button>
-                                </form>
-                            </div>
+                    
+                    <li class="dropdown cart_wrap">
+                    <a class="nav-link" href="#" data-toggle="dropdown"><i class="ion-android-cart"></i><span class="cart_count">2</span></a>
+                        <div class="cart_box dropdown-menu dropdown-menu-right">
+                        
+                        
+                        
+                            <ul class="cart_list">
+                                {% if cartData is defined  %}
+                                    
+                                {% for element in cartData %}
+                                    <li>
+                                        <a href="{{path("cart_delete" ,{id:element.product.id})}}" class="item_remove"><i class="ion-close"></i></a>
+                                        <div class="row">
+                                            <a>
+                                                {#% if app.request.attributes.get('_route')=='index' %#} 
+                                                {% for image in element.product.images %}
+                                                
+                                                <div class="container col md5">
+                                                    <img src="{{asset('/uploads/' ~ image.link)}}" alt="produit" width="50" , height="50">                 
+                                                </div>
+                                                
+                                                
+                                                 {% endfor %} 
+                                                {#% endif %#}
+                                                {# <div class="container col md5">
+                                                </div> #}
+                                            </a>
+                                            <div class="container col md5">
+                                            {{element.product.name}}
+                                                
+                                            <span class="cart_quantity"> {{element.quantity}} x <span class="cart_amount"> <span class="price_symbole"> $ </span>{{element.product.price}}</span></span>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    
+                                {% endfor %}
+                                {% endif %}
+
+                            </ul>
+
+
+                        <div class="cart_footer">
+                            {% if total is defined %}
+                                
+                            <p class="cart_total">Total: <span class="cart_amount"> <span class="price_symbole">$</span>{{total}}</span></p>
+                            {% endif %}
+                            <p class="cart_buttons"><a href="{{ path('cart') }}" class="btn btn-default rounded-0 view-cart">Voir le panier</a><a href="{{ path('commit') }}" class="btn btn-dark rounded-0 checkout">Checkout</a></p>
                         </div>
-                    </li>
+                    </div>
+                </li>
                     <li>
                         {# changement de langue #} {% for locale in locales %} {% if locale != app.request.locale %}
                         <a class="nav-link active" href="{{ path('langchange', {'locale': locale}) }}">{{ locale }}</a> {% endif %} {% endfor %}

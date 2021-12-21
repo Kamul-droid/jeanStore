@@ -36,15 +36,15 @@
                 </label>
             </div>
         #}
-        <div class="col-md-6">
-            <button class="btn btn-lg btn-primary" type="submit">
-                Sign in
-            </button>
-        </div>
-        <div class="col-md-6">
-            <button class="btn btn-lg btn-primary" type="submit">
-                Register
-            </button>
+        <div class="row">
+            <div class="col-md-6">
+                <button class="btn btn-lg btn-primary" type="submit">
+                    Sign in
+                </button>
+            </div>
+            <div class="col-md-6">
+                <a class="btn btn-lg btn-secondary " href="{{ path('app_register') }}"> Register</a>
+            </div>
         </div>
     </form>
 </section>

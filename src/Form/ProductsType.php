@@ -2,10 +2,11 @@
 
 namespace App\Form;
 
-use App\Entity\Products;
-use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\AbstractType;
+use App\Entity\Products;
 
 class ProductsType extends AbstractType
 {
@@ -16,8 +17,12 @@ class ProductsType extends AbstractType
             ->add('name')
             ->add('category')
             ->add('quantity')
-            ->add('created_at')
-            ->add('orders')
+            ->add('image',FileType::class,['label'=>false,
+            'multiple'=>true,
+            'mapped'=>false,
+            'required'=>false])
+
+            
         ;
     }
 

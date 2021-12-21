@@ -31,6 +31,21 @@
                 <th>Created_at</th>
                 <td>{{ product.createdAt ? product.createdAt|date('Y-m-d H:i:s') : '' }}</td>
             </tr>
+            <tr>
+                <th>Image</th>
+
+                <td>
+                    {% if app.request.attributes.get('_route')=='products_show' %} {% for image in product.images %}
+
+                    <div class="container col md5">
+                        <img src="{{asset('/uploads/' ~ image.link)}}" alt="article" width="300" , height="450"> {# <a href="{{path('articles_delete_image',{'id':image.id}) }}" data-delete data-token="{{ csrf_token('delete' ~ image.id) }}"> supprimer </a>                    #}
+
+                    </div>
+
+                    {% endfor %} {% endif %}
+
+                </td>
+            </tr>
         </tbody>
     </table>
 
