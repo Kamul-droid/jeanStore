@@ -2,10 +2,12 @@
 
 namespace App\Entity;
 
-use App\Repository\UsersRepository;
-use Doctrine\ORM\Mapping as ORM;
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Doctrine\ORM\Mapping as ORM;
+use App\Repository\UsersRepository;
 
 /**
  * @ORM\Entity(repositoryClass=UsersRepository::class)
@@ -62,10 +64,16 @@ class Users implements UserInterface
     private $rgpd;
 
     /**
-     * @ORM\OneToOne(targetEntity=Orders::class, mappedBy="user", cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity=Orders::class, mappedBy="user", orphanRemoval=true)
      */
     private $orders;
 
+    public function __construct()
+    {
+        $this->orders = new ArrayCollection();
+    }
+
+    
     public function getId(): ?int
     {
         return $this->id;
@@ -207,20 +215,35 @@ class Users implements UserInterface
         return $this;
     }
 
-    public function getOrders(): ?Orders
+    /**
+     * @return Collection|Orders[]
+     */
+    public function getOrders(): Collection
     {
         return $this->orders;
     }
 
-    public function setOrders(Orders $orders): self
+    public function addOrder(Orders $order): self
     {
-        // set the owning side of the relation if necessary
-        if ($orders->getUser() !== $this) {
-            $orders->setUser($this);
+        if (!$this->orders->contains($order)) {
+            $this->orders[] = $order;
+            $order->setUser($this);
         }
-
-        $this->orders = $orders;
 
         return $this;
     }
+
+    public function removeOrder(Orders $order): self
+    {
+        if ($this->orders->removeElement($order)) {
+            // set the owning side to null (unless already changed)
+            if ($order->getUser() === $this) {
+                $order->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    
 }

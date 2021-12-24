@@ -95,7 +95,7 @@
                         </li>
                        
                         <li>
-                            <a class="nav-link" href="{{ path('about') }}">{% trans %}Qui sommes-nous{% endtrans %} </a>
+                            <a class="nav-link" href="{{ path('user_order') }}">{% trans %}Mes commandes{% endtrans %} </a>
 
                         </li>
                         <li>
@@ -152,7 +152,14 @@
                     
                     
                     <li class="dropdown cart_wrap">
-                    <a class="nav-link" href="#" data-toggle="dropdown"><i class="ion-android-cart"></i><span class="cart_count">2</span></a>
+                    <a class="nav-link" href="#" data-toggle="dropdown"><i class="ion-android-cart"></i><span class="cart_count"> 
+                        {% if cartData is defined %}
+                        
+                            {{cartData|length}} 
+                        {% else %}
+                            {{0}}
+                        {% endif %} 
+                    </span></a>
                         <div class="cart_box dropdown-menu dropdown-menu-right">
                         
                         
@@ -197,7 +204,7 @@
                                 
                             <p class="cart_total">Total: <span class="cart_amount"> <span class="price_symbole">$</span>{{total}}</span></p>
                             {% endif %}
-                            <p class="cart_buttons"><a href="{{ path('cart') }}" class="btn btn-default rounded-0 view-cart">Voir le panier</a><a href="{{ path('commit') }}" class="btn btn-dark rounded-0 checkout">Checkout</a></p>
+                            <p class="cart_buttons"><a href="{{ path('cart') }}" class="btn btn-default rounded-0 view-cart">Voir le panier</a><a href="{{ path('checkout') }}" class="btn btn-dark rounded-0 checkout">Checkout</a></p>
                         </div>
                     </div>
                 </li>

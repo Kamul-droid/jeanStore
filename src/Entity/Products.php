@@ -44,19 +44,30 @@ class Products
      */
     private $created_at;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=Orders::class, inversedBy="product")
-     */
-    private $orders;
+    
 
     /**
      * @ORM\OneToMany(targetEntity=Image::class, mappedBy="product", orphanRemoval=true, cascade = {"persist"})
      */
     private $images;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=Orders::class, mappedBy="product")
+     */
+    private $orders;
+
+   
+
+    
+
+    
+
     public function __construct()
     {
         $this->images = new ArrayCollection();
+        $this->orders = new ArrayCollection();
+        
+       
     }
 
     public function getId(): ?int
@@ -124,17 +135,7 @@ class Products
         return $this;
     }
 
-    public function getOrders(): ?Orders
-    {
-        return $this->orders;
-    }
 
-    public function setOrders(?Orders $orders): self
-    {
-        $this->orders = $orders;
-
-        return $this;
-    }
 
     /**
      * @return Collection|Image[]
@@ -165,4 +166,33 @@ class Products
 
         return $this;
     }
+
+    /**
+     * @return Collection|Orders[]
+     */
+    public function getOrders(): Collection
+    {
+        return $this->orders;
+    }
+
+    public function addOrder(Orders $order): self
+    {
+        if (!$this->orders->contains($order)) {
+            $this->orders[] = $order;
+            $order->addProduct($this);
+        }
+
+        return $this;
+    }
+
+    public function removeOrder(Orders $order): self
+    {
+        if ($this->orders->removeElement($order)) {
+            $order->removeProduct($this);
+        }
+
+        return $this;
+    }
+
+    
 }

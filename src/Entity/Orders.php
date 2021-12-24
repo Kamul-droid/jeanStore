@@ -2,10 +2,10 @@
 
 namespace App\Entity;
 
-use App\Repository\OrdersRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
+use App\Repository\OrdersRepository;
 
 /**
  * @ORM\Entity(repositoryClass=OrdersRepository::class)
@@ -25,21 +25,26 @@ class Orders
     private $created_at;
 
     /**
-     * @ORM\OneToOne(targetEntity=Users::class, inversedBy="orders", cascade={"persist", "remove"})
+     * @ORM\ManyToOne(targetEntity=Users::class, inversedBy="orders")
      * @ORM\JoinColumn(nullable=false)
      */
     private $user;
 
     /**
-     * @ORM\OneToMany(targetEntity=Products::class, mappedBy="orders")
+     * @ORM\ManyToMany(targetEntity=Products::class, inversedBy="orders")
      */
     private $product;
+
+    
 
     public function __construct()
     {
         $this->product = new ArrayCollection();
     }
 
+   
+
+    
     public function getId(): ?int
     {
         return $this->id;
@@ -62,7 +67,7 @@ class Orders
         return $this->user;
     }
 
-    public function setUser(Users $user): self
+    public function setUser(?Users $user): self
     {
         $this->user = $user;
 
@@ -81,7 +86,6 @@ class Orders
     {
         if (!$this->product->contains($product)) {
             $this->product[] = $product;
-            $product->setOrders($this);
         }
 
         return $this;
@@ -89,13 +93,11 @@ class Orders
 
     public function removeProduct(Products $product): self
     {
-        if ($this->product->removeElement($product)) {
-            // set the owning side to null (unless already changed)
-            if ($product->getOrders() === $this) {
-                $product->setOrders(null);
-            }
-        }
+        $this->product->removeElement($product);
 
         return $this;
     }
+
+   
+    
 }

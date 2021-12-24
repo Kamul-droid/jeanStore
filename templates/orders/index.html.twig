@@ -4,11 +4,14 @@
 
 {% block body %}
     <h1>Orders index</h1>
-
-    <table class="table">
+<section class="container">
+    <table class="table responsive">
         <thead>
             <tr>
                 <th>Id</th>
+                <th>user</th>
+                <th>product</th>
+                <th>price</th>
                 <th>Created_at</th>
                 <th>actions</th>
             </tr>
@@ -17,6 +20,25 @@
         {% for order in orders %}
             <tr>
                 <td>{{ order.id }}</td>
+                <td>{{ order.user.firstname}}</td>
+                <td >
+                    <table>
+                    {% for item in order.product %}
+                     <tr>
+                     <td>{{ item.name }} </td> 
+                     </tr>
+                    {% endfor %}
+                    </table>
+                </td>
+                <td>
+                    <table>
+                    {% for item in order.product %}
+                    <tr>
+                     <td class="row"> {{ item.price }} </td> 
+                    </tr>
+                     {% endfor %}
+                    </table>
+                </td>
                 <td>{{ order.createdAt ? order.createdAt|date('Y-m-d H:i:s') : '' }}</td>
                 <td>
                     <a href="{{ path('orders_show', {'id': order.id}) }}">show</a>
@@ -32,4 +54,5 @@
     </table>
 
     <a href="{{ path('orders_new') }}">Create new</a>
+</section>
 {% endblock %}

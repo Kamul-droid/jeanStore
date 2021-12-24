@@ -75,7 +75,7 @@ Checkout
                 </div>
             </div>
         </div>
-        <div class="row">
+        {# <div class="row">
         	<div class="col-md-12">
             	<div class="heading_s2">
             		<h5>Billing Details</h5>
@@ -223,7 +223,7 @@ Checkout
                     </div>
                 </form>
             </div>
-        </div>
+        </div> #}
         <div class="row">
         	<div class="col-12">
             	<div class="xs_divider clearfix"></div>
@@ -243,27 +243,37 @@ Checkout
                             </tr>
                         </thead>
                         <tbody>
-                        	<tr>
-                                <td>yoga mat For Exercises <span class="product-qty">x 2</span></td>
-                              	<td>$70.00</td>
-                            </tr>
-                            <tr>
-                                <td>Running Shoes <span class="product-qty">x 1</span></td>
-                              	<td>$40.00</td>
-                            </tr>
-                            <tr>
-                                <td>Cotton Yoga Strap <span class="product-qty">x 3</span></td>
-                              	<td>$156.00</td>
-                            </tr>
+                            {% if cartData is defined %}
+                            {% for item in cartData %}
+                                
+                                <tr>
+                                    <td>{{item.product.name}} <span class="product-qty">x {{item.quantity}}</span></td>
+                                    <td>${{item.product.price}}</td>
+                                </tr>
+                            {% endfor %}
+                            {% endif %}
+                            
                         </tbody>
                         <tfoot>
                         	<tr>
                             	<td>SubTotal</td>
-                                <td>$266.00</td>
+                                {% if subtotal is defined %}
+                                
+                                    <td>$ {{ subtotal }}</td>
+                                {% else %}
+                                    
+                                    <td>$ {{ 00 }}</td>
+                                {% endif %} 
                             </tr>
                         	<tr>
                             	<td class="product-subtotal">Total</td>
-                                <td class="product-subtotal">$266.00</td>
+                                {% if total is defined %}
+                                    
+                                    <td class="product-subtotal">$ {{total}} </td>
+                                 {% else %}
+                                    <td class="product-subtotal">$ {{00}} </td>
+                                    
+                                {% endif %}    
                             </tr>
                         </tfoot>
                     </table>
@@ -294,7 +304,7 @@ Checkout
                         <p data-method="option5" class="payment-text">Pay via PayPal; you can pay with your credit card if you don't have a PayPal account.</p>
                     </div>
                 </div>
-                <a href="{{ path('index') }}" class="btn btn-default">Place Order</a>
+                <a href="{{ path('commit') }}" class="btn btn-default">Place Order</a>
             </div>
         </div>
     </div>

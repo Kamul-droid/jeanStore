@@ -11,9 +11,11 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\Extension\DataCollector\FormDataExtractor;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use ProxyManager\ProxyGenerator\ValueHolder\MethodGenerator\Constructor;
 use MongoDB\BSON\Timestamp;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\ORM\Query\AST\Functions\CurrentTimestampFunction;
+use Doctrine\Common\Annotations\Annotation;
 use DateTimeImmutable;
 use App\Repository\ProductsRepository;
 use App\Repository\OrdersRepository;
@@ -26,6 +28,16 @@ use App\Entity\Coupons;
 class StoreController extends AbstractController
 {
     /**
+     * variable de la classe StoreController
+     * prend en entrée le montant de la reduction 
+     * calculé avec le coupon
+     *
+     * @var float
+     */
+    private $value;
+
+    /**
+     * 
      * @Route("/", name="index")
      */
     public function index( ProductsRepository $prod ,SessionInterface $session): Response
@@ -35,17 +47,20 @@ class StoreController extends AbstractController
          // on initialise la session pour le cart
 
          $cart = $session->get("shoppingCart",[]);
-         $cartUpdateTime = $session->get("AddToCartTime",[]);
+         $cartUpdateTime = $session->get("AddToCartTime",[]) ;
 
          //On fabrique les données
          $cartData = [];
          $total = 0 ;
 
          $checkTime = time();
-         foreach ($cartUpdateTime as $tp){
+         if (empty($cartUpdateTime) ) {
+             $cartUpdateTime =0;
+         }
+         
+        //$this->del($session);
 
-
-         if (($checkTime - ($tp + 24*3600) )>0 ) {
+         if (($checkTime - ($cartUpdateTime + 24*3600) )>0 ) {
             $this->del($session);
          } else {
              
@@ -63,7 +78,7 @@ class StoreController extends AbstractController
             
          }
  
-        }
+        
 
         return $this->render('store/shop.html.twig', [
             "products" => $allproducts,
@@ -156,7 +171,7 @@ class StoreController extends AbstractController
         // validation du coupon
 
         $form ->handleRequest($request);
-        $value = 0;
+        $this->value = 0;
         $subTotal = 0;
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -168,7 +183,7 @@ class StoreController extends AbstractController
 
             foreach($allPromo as $cp){
                 if ($cp ->getCode() == $submitCode && $cp->getStatus() ) {
-                    $value = ($total *$cp ->getValue());
+                    $this->value = ($total *$cp ->getValue());
                 } else {
                    $this->addFlash(
                       'warning',
@@ -181,9 +196,9 @@ class StoreController extends AbstractController
         }
 
         $subTotal = $total;
-        $total -=$value;
+        $total -= $this->value;
 
-        return $this->render('cart/cart.html.twig', ["cartData"=>$cartData, "total" => $total, "coupon" =>$form->createView(), "reduction"=>$value, "subtotal"=>$subTotal]);
+        return $this->render('cart/cart.html.twig', ["cartData"=>$cartData, "total" => $total, "coupon" =>$form->createView(), "reduction"=>$this->value, "subtotal"=>$subTotal]);
     }
 
 
@@ -203,9 +218,9 @@ class StoreController extends AbstractController
         }
 
         // On sauvegarde la session shopping et l'heure de la derniere mise à jour
-        $time = Time() ;
+        $updateTime = Time() ;
         $session->set("shoppingCart",$cart);
-        $session->set("AddToCartTime",$time);
+        $session->set("AddToCartTime",$updateTime);
 
         return $this->redirectToRoute("cart");
         
@@ -263,7 +278,7 @@ class StoreController extends AbstractController
        // On supprime la session
        $session->remove("shoppingCart");
        $session->remove("AddToCartTime");
-       return $this->redirectToRoute("cart");
+       return $this->redirectToRoute("index");
     }
 
     /**
@@ -273,22 +288,34 @@ class StoreController extends AbstractController
     public function Command(OrdersRepository $order, ProductsRepository $product, Request $request, SessionInterface $session,ObjectManager $entityManager): Response
     {   $order = new Orders(); 
         $cart = $session->get("shoppingCart",[]);
-        
+        //$listProd =[];
         foreach($cart as $id =>$quantity ){
             $Prod = $product->find($id);
-            $order ->addProduct($Prod);
+           // $listProd [] = $Prod;
+            $order->addProduct($Prod);
+            $order->setQty($quantity);
         }
 
        $access = $this->isGranted("ROLE_USER");
        if ($access) {
            
            
-           $order -> setUser($this->getUser());
-           $order -> setCreatedAt(new \DateTimeImmutable('now'));
+           //$order -> setUser($this->getUser());
+           $order -> setCreatedAt(new DateTimeImmutable('now'));
+           // mise à jour des commandes utilisateurs
+           $this->getUser()->addOrder($order);
+
            $entityManager->persist($order);
            $entityManager->flush();
+
+           $this->addFlash(
+            'success',
+            'Merci d\'avoir payer nos produits'
+
+        );
+        $this->del($session);
    
-           return $this->redirectToRoute("checkout");
+           return $this->redirectToRoute("index");
           
        } else {
            return $this->redirectToRoute('app_login');
@@ -299,9 +326,30 @@ class StoreController extends AbstractController
     /**
      * @Route("checkout", name="checkout")
      */
-    public function checkout(): Response
+    public function checkout(SessionInterface $session, ProductsRepository $prod): Response
     {
-        return $this->render('cart/checkout.html.twig', []);
+        $cart = $session->get("shoppingCart",[]);
+
+        //On fabrique les données
+        $cartData = [];
+        $total = 0 ;
+
+        foreach ($cart as $id => $qty){
+            $product = $prod -> find($id);
+            $cartData [] = [
+                "product" => $product,
+                "quantity" => $qty
+            ];
+
+            $total +=$product->getPrice()*$qty;
+        }
+
+        $subTotal = $total;
+        $total -= $this->value;
+
+       
+
+        return $this->render('cart/checkout.html.twig', ["cartData"=>$cartData, "subtotal" => $subTotal, "total" => $total]);
     }
        
     
