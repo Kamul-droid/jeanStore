@@ -6,6 +6,8 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Dompdf\Options;
+use Dompdf\Dompdf;
 use Doctrine\ORM\Mapping\Id;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Repository\UsersRepository;
@@ -27,7 +29,7 @@ class OrdersController extends AbstractController
         // $allOrder = $ordersRepository->findAll();
         // foreach ($allOrder as $key => $value) {
             
-        //     foreach (($value->getProduct()) as $key => $value) {
+        //     foreach (($value->getProductQties()) as $key => $value) {
         //         dump($value);
         //     };
         // }
@@ -86,6 +88,7 @@ class OrdersController extends AbstractController
      */
     public function show(Orders $order): Response
     {
+        
         return $this->render('orders/show.html.twig', [
             'order' => $order,
         ]);
@@ -122,5 +125,42 @@ class OrdersController extends AbstractController
         }
 
         return $this->redirectToRoute('orders_index', [], Response::HTTP_SEE_OTHER);
+    }
+
+    /**
+     * @Route("/recept/{id}", name="orders_receipt")
+     */
+    public function receipt(Orders $orders): Response
+    {
+        return $this->render('orders/recept.html.twig', ["order"=>$orders]);
+    }
+
+    /**
+     * @Route("/pdf/{id}", name="orders_pdf", methods={"GET"})
+     */
+    public function pdFile(Orders $order): Response
+    {
+        $pdfOptions = new Options();
+        $pdfOptions ->set("defaultFont","Arial");
+
+        //Instanciation de Dompdf avec les options
+        $dompdf = new Dompdf($pdfOptions);
+
+        $html = $this->renderView('orders/show.html.twig', [
+            "order" => $order,
+        ]);
+        // load HTML to dompdf
+        $dompdf->loadHtml($html);
+
+        // Setup the paper size and orinetation
+
+        $dompdf->setPaper("A4","landscape");
+
+        // render the Html as pdf
+
+        $dompdf ->render();
+
+        //Output the generated pdf to browser
+        $dompdf->stream("jeanstore.pdf",["attachement"=>true]);
     }
 }

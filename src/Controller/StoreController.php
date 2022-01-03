@@ -18,10 +18,12 @@ use Doctrine\ORM\Query\AST\Functions\CurrentTimestampFunction;
 use Doctrine\Common\Annotations\Annotation;
 use DateTimeImmutable;
 use App\Repository\ProductsRepository;
+use App\Repository\ProductQtyRepository;
 use App\Repository\OrdersRepository;
 use App\Repository\CouponsRepository;
 use App\Form\CouponsType;
 use App\Entity\Products;
+use App\Entity\ProductQty;
 use App\Entity\Orders;
 use App\Entity\Coupons;
 
@@ -38,11 +40,17 @@ class StoreController extends AbstractController
 
     /**
      * 
-     * @Route("/", name="index")
+     * @Route("/{page<\d+>?1}", name="index")
      */
-    public function index( ProductsRepository $prod ,SessionInterface $session): Response
+    public function index( ProductsRepository $prod ,SessionInterface $session, $page=1): Response
     {   
-        $allproducts = $prod->findAll();
+        //navigation entre les pages
+        $limit = 2;
+        $start = $page*$limit-$limit;
+        $total = count($prod->findAll());
+        $pages = ceil($total/$limit);
+        // les produits à afficher
+        $allproducts = $prod->findBy([],[],$limit,$start);
 
          // on initialise la session pour le cart
 
@@ -83,7 +91,9 @@ class StoreController extends AbstractController
         return $this->render('store/shop.html.twig', [
             "products" => $allproducts,
             "cartData"=>$cartData,
-             "total" => $total
+             "total" => $total,
+            "pages" =>$pages,
+            "page"=>$page
         ]);
     }
 
@@ -285,15 +295,22 @@ class StoreController extends AbstractController
      * @IsGranted("ROLE_USER")
      * @Route("/commit", name="commit")
      */
-    public function Command(OrdersRepository $order, ProductsRepository $product, Request $request, SessionInterface $session,ObjectManager $entityManager): Response
+    public function Command(ProductQtyRepository $qtyInfo, OrdersRepository $order, ProductsRepository $product, Request $request, SessionInterface $session,ObjectManager $entityManager): Response
     {   $order = new Orders(); 
         $cart = $session->get("shoppingCart",[]);
-        //$listProd =[];
+        
         foreach($cart as $id =>$quantity ){
             $Prod = $product->find($id);
-           // $listProd [] = $Prod;
+            // Ajout du produit à la table commande;
             $order->addProduct($Prod);
-            $order->setQty($quantity);
+            // Collecte de la quantité de produit commandé
+            $qtyInfo = new ProductQty();
+            $qtyInfo->setOrderId($order);
+            $qtyInfo->setProduct($Prod);
+            $qtyInfo->setQuantity($quantity);
+            $entityManager->persist($qtyInfo);
+           
+
         }
 
        $access = $this->isGranted("ROLE_USER");

@@ -12,6 +12,7 @@
                 <th>user</th>
                 <th>product</th>
                 <th>price</th>
+                <th>Qty</th>
                 <th>Created_at</th>
                 <th>actions</th>
             </tr>
@@ -26,7 +27,7 @@
                     {% for item in order.product %}
                      <tr>
                      <td>{{ item.name }} </td> 
-                     </tr>
+                     {# </tr> #}
                     {% endfor %}
                     </table>
                 </td>
@@ -38,6 +39,15 @@
                     </tr>
                      {% endfor %}
                     </table>
+                </td>
+                <td>
+                    <table>
+                        {% for item in order.productQties %}
+                        <tr>
+                         <td class="row"> {{ item.quantity }} </td> 
+                        </tr>
+                         {% endfor %}
+                        </table>
                 </td>
                 <td>{{ order.createdAt ? order.createdAt|date('Y-m-d H:i:s') : '' }}</td>
                 <td>

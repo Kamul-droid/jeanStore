@@ -1,5 +1,5 @@
 index:
-   path: /
+   path: /{page<\d+>?1}
    controller: App\Controller\StoreController::index
 
 cart:

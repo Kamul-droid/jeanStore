@@ -248,7 +248,7 @@ Checkout
                                 
                                 <tr>
                                     <td>{{item.product.name}} <span class="product-qty">x {{item.quantity}}</span></td>
-                                    <td>${{item.product.price}}</td>
+                                    <td>${{item.product.price * item.quantity}}</td>
                                 </tr>
                             {% endfor %}
                             {% endif %}

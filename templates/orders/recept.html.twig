@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+
 
 {% block title %}Orders{% endblock %}
 
@@ -74,11 +74,6 @@
         </tbody>
     </table>
 
-    <a href="{{ path('orders_pdf', {'id': order.id}) }}">Generate pdf</a>
-    <a href="{{ path('orders_index') }}">back to list</a>
-
-    <a href="{{ path('orders_edit', {'id': order.id}) }}">edit</a>
-
-    {{ include('orders/_delete_form.html.twig') }}
+    
 </section>
 {% endblock %}

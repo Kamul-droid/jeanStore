@@ -95,11 +95,11 @@ a:hover,
 .filter_price .ui-slider .ui-slider-range,
 .quantity .minus:hover,
 .quantity .plus:hover {
-	background-color: #7247B1;
+	background-color: #3aabec;
 }
 
 .bg_default {
-	background-color: #7247B1 !important;
+	background-color: #41bd70 !important;
 }
 
 .btn-default,

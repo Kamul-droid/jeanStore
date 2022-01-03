@@ -35,11 +35,17 @@ class Orders
      */
     private $product;
 
+    /**
+     * @ORM\OneToMany(targetEntity=ProductQty::class, mappedBy="ord")
+     */
+    private $productQties;
+
     
 
     public function __construct()
     {
         $this->product = new ArrayCollection();
+        $this->productQties = new ArrayCollection();
     }
 
    
@@ -94,6 +100,36 @@ class Orders
     public function removeProduct(Products $product): self
     {
         $this->product->removeElement($product);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|ProductQty[]
+     */
+    public function getProductQties(): Collection
+    {
+        return $this->productQties;
+    }
+
+    public function addProductQty(ProductQty $productQty): self
+    {
+        if (!$this->productQties->contains($productQty)) {
+            $this->productQties[] = $productQty;
+            $productQty->setOrderId($this);
+        }
+
+        return $this;
+    }
+
+    public function removeProductQty(ProductQty $productQty): self
+    {
+        if ($this->productQties->removeElement($productQty)) {
+            // set the owning side to null (unless already changed)
+            if ($productQty->getOrderId() === $this) {
+                $productQty->setOrderId(null);
+            }
+        }
 
         return $this;
     }

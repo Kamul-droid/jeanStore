@@ -56,6 +56,11 @@ class Products
      */
     private $orders;
 
+    /**
+     * @ORM\OneToMany(targetEntity=ProductQty::class, mappedBy="product")
+     */
+    private $productQties;
+
    
 
     
@@ -66,6 +71,7 @@ class Products
     {
         $this->images = new ArrayCollection();
         $this->orders = new ArrayCollection();
+        $this->productQties = new ArrayCollection();
         
        
     }
@@ -189,6 +195,36 @@ class Products
     {
         if ($this->orders->removeElement($order)) {
             $order->removeProduct($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|ProductQty[]
+     */
+    public function getProductQties(): Collection
+    {
+        return $this->productQties;
+    }
+
+    public function addProductQty(ProductQty $productQty): self
+    {
+        if (!$this->productQties->contains($productQty)) {
+            $this->productQties[] = $productQty;
+            $productQty->setProduct($this);
+        }
+
+        return $this;
+    }
+
+    public function removeProductQty(ProductQty $productQty): self
+    {
+        if ($this->productQties->removeElement($productQty)) {
+            // set the owning side to null (unless already changed)
+            if ($productQty->getProduct() === $this) {
+                $productQty->setProduct(null);
+            }
         }
 
         return $this;
