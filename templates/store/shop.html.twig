@@ -35,7 +35,7 @@
         	<div class="col-lg-9">
             	<div class="row align-items-center justify-content-between pb-1 mb-4">
                 	<div class="col-auto">
-                    	<span class="align-middle">Showing 1-9 of 50 results</span>
+                    	<span class="align-middle">Showing {{indicateur[0]+1}} - {{indicateur[1]}} of {{indicateur[2]}} results</span>
                     </div>
                     <div class="col-auto">
                     	<div class="custom_select">
@@ -71,7 +71,7 @@
             
                                     </a>
 
-                                   
+                
                                     <div class="product_action_box">
                                         <ul class="list_none pr_action_btn">
                                             <li><a href="{{path('cart_add', {'id': product.id})}}" class="btn btn-default rounded-0">Add To Cart</a></li>
@@ -80,152 +80,14 @@
                                 </div>
                                 <div class="product_info">
                                     <h6 class="product_title"><a href="#">{{product.name}}</a></h6>
-                                    <span class="price"><del>$35.00</del><ins>${{product.price}}</ins></span>
+                                    <span class="price"><del>${{ 15.00 + product.price }}</del><ins>${{product.price}}</ins></span>
                                     <div class="rating"><div class="product_rate" style="width:80%"></div></div>
                                 </div>
                             </div>
                         </div>
 
                 {% endfor %}
-{#                 
-                    <div class="col-lg-4 col-sm-6">
-                        <div class="product">
-                            <div class="product_img">
-                                <a href="#"><img src="assets/images/product_img2.jpg" alt="product_img2"/></a>
-                                <div class="product_action_box">
-                                    <ul class="list_none pr_action_btn">
-                                        <li><a href="#" class="btn btn-default rounded-0">Add To Cart</a></li>
-                                    </ul>
-                                </div>
-                            </div>
 
-                            <div class="product_info">
-                                <h6 class="product_title"><a href="#">Running Shoes</a></h6>
-                                <span class="price"><del>$35.00</del><ins>$45.00</ins></span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-sm-6">
-                        <div class="product">
-                            <span class="pr_flash">-25%</span>
-                            <div class="product_img">
-                                <a href="#"><img src="assets/images/product_img3.jpg" alt="product_img3"/></a>
-                                <div class="product_action_box">
-                                    <ul class="list_none pr_action_btn">
-                                        <li><a href="#" class="btn btn-default rounded-0">Add To Cart</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="product_info">
-                                <h6 class="product_title"><a href="#">Cotton Yoga Strap</a></h6>
-                                <span class="price"><ins>$45.00</ins></span>
-                                <div class="rating"><div class="product_rate" style="width:92%"></div></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-sm-6">
-                        <div class="product">
-                            <div class="product_img">
-                                <a href="#"><img src="assets/images/product_img4.jpg" alt="product_img4"/></a>
-                                <div class="product_action_box">
-                                    <ul class="list_none pr_action_btn">
-                                        <li><a href="#" class="btn btn-default rounded-0">Add To Cart</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="product_info">
-                                <h6 class="product_title"><a href="#">Plastic 900 ml Bottle</a></h6>
-                                <span class="price"><del>$35.00</del><ins>$12.00</ins></span>
-                                <div class="rating"><div class="product_rate" style="width:85%"></div></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-sm-6">
-                        <div class="product">
-                            <span class="pr_flash">-25%</span>
-                            <div class="product_img">
-                                <a href="#"><img src="assets/images/product_img5.jpg" alt="product_img5"/></a>
-                                <div class="product_action_box">
-                                    <ul class="list_none pr_action_btn">
-                                        <li><a href="#" class="btn btn-default rounded-0">Add To Cart</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="product_info">
-                                <h6 class="product_title"><a href="#">Purple 6 mm Yoga Mat</a></h6>
-                                <span class="price"><ins>$25.00</ins></span>
-                                <div class="rating"><div class="product_rate" style="width:92%"></div></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-sm-6">
-                        <div class="product">
-                            <div class="product_img">
-                                <a href="#"><img src="assets/images/product_img6.jpg" alt="product_img6"/></a>
-                                <div class="product_action_box">
-                                    <ul class="list_none pr_action_btn">
-                                        <li><a href="#" class="btn btn-default rounded-0">Add To Cart</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="product_info">
-                                <h6 class="product_title"><a href="#">Yoga Fitness Exercise Ball</a></h6>
-                                <span class="price"><del>$15.00</del><ins>$13.00</ins></span>
-                                <div class="rating"><div class="product_rate" style="width:72%"></div></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-sm-6">
-                        <div class="product">
-                        	<span class="pr_flash">-20%</span>
-                            <div class="product_img">
-                                <a href="#"><img src="assets/images/product_img7.jpg" alt="product_img7"/></a>
-                                <div class="product_action_box">
-                                    <ul class="list_none pr_action_btn">
-                                        <li><a href="#" class="btn btn-default rounded-0">Add To Cart</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="product_info">
-                                <h6 class="product_title"><a href="#">Purple Yoga Mat Bag</a></h6>
-                                <span class="price"><ins>$18.00</ins></span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-sm-6">
-                        <div class="product">
-                            <div class="product_img">
-                                <a href="#"><img src="assets/images/product_img8.jpg" alt="product_img8"/></a>
-                                <div class="product_action_box">
-                                    <ul class="list_none pr_action_btn">
-                                        <li><a href="#" class="btn btn-default rounded-0">Add To Cart</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="product_info">
-                                <h6 class="product_title"><a href="#">Yoga Dress</a></h6>
-                                <span class="price"><del>$29.00</del><ins>$36.00</ins></span>
-                                <div class="rating"><div class="product_rate" style="width:72%"></div></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-sm-6">
-                        <div class="product">
-                            <div class="product_img">
-                                <a href="#"><img src="assets/images/product_img9.jpg" alt="product_img9"/></a>
-                                <div class="product_action_box">
-                                    <ul class="list_none pr_action_btn">
-                                        <li><a href="#" class="btn btn-default rounded-0">Add To Cart</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="product_info">
-                                <h6 class="product_title"><a href="#">Yoga Mat Towels</a></h6>
-                                <span class="price"><del>$22.00</del><ins>$18.00</ins></span>
-                                <div class="rating"><div class="product_rate" style="width:72%"></div></div>
-                            </div>
-                        </div>
-                    </div> #}
                 </div>
                 <div class="row">
                     <div class="col-12 mt-3 mt-lg-4">
@@ -243,67 +105,50 @@
         	<div class="col-lg-3 order-lg-first mt-5 mt-lg-0">
             	<div class="sidebar">
                 	<div class="widget widget_search">
-                        <form class="search_form"> 
-                            <input required="" class="form-control" placeholder="Search..." type="text">
-                            <button type="submit" title="Search" name="submit" value="Submit">
-                                <span class="ti-search"></span>
-                            </button>
-                        </form>
+                        {{form(form) }}
+                
                     </div>
                     <div class="widget widget_categories">
                     	<h5 class="widget_title">Categories</h5>
                         <ul class="border_bottom_dash">
-                            <li><a href="#"><span class="categories_name">Enfant</span><span class="categories_num">(9)</span></a></li>
-                            <li><a href="#"><span class="categories_name">Adolescent &amp; Branché</span><span class="categories_num">(6)</span></a></li>
-                            <li><a href="#"><span class="categories_name">Tendance</span><span class="categories_num">(4)</span></a></li>
-                            <li><a href="#"><span class="categories_name">Chaud</span><span class="categories_num">(7)</span></a></li>
-                            <li><a href="#"><span class="categories_name">Chic</span><span class="categories_num">(12)</span></a></li>
+                            {% for cat in categories %}
+                                
+                            <li><a href="#"><span class="categories_name"> {{cat.name}}</span></a></li>
+                            {% endfor %}
+                            
                     	</ul>
                     </div>
-                    <div class="widget">
-                    	<h5 class="widget_title">Filter By Price</h5>
-                        <div class="filter_price">
-                             <div id="price_filter"></div>
-                             <div class="d-flex align-items-center justify-content-between">
-                                 <span>Price <span id="flt_price"></span></span>
-                                 <input type="hidden" id="price_first">
-                                 <input type="hidden" id="price_second">
-                                 <button type="submit" class="btn btn-default btn-sm rounded-0">Filter</button>
-                             </div>
-                         </div>
-                    </div>
+                   
                     <div class="widget">
                         <h5 class="widget_title">Recent Items</h5>
                         <ul class="recent_post border_bottom_dash list_none">
-                            <li>
-                                <div class="post_img">
-                                    <a href="#"><img src="assets/images/shop_small1.jpg" alt="shop_small1"></a>
-                                </div>
-                                <div class="post_content">
-                                    <h6><a href="#">yoga mat For Exercises</a></h6>
-                                    <div class="product_price"><span class="price"><del>$35.00</del><ins>$23.00</ins></span></div>
-                                    <div class="rating"><div class="product_rate" style="width:80%"></div></div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="post_img">
-                                    <a href="#"><img src="assets/images/shop_small2.jpg" alt="shop_small2"></a>
-                                </div>
-                                <div class="post_content">
-                                    <h6><a href="#">Running Shoes</a></h6>
-                                    <div class="product_price"><span class="price"><del>$35.00</del><ins>$45.00</ins></span></div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="post_img">
-                                    <a href="#"><img src="assets/images/shop_small3.jpg" alt="shop_small3"></a>
-                                </div>
-                                <div class="post_content">
-                                    <h6><a href="#">Cotton Yoga Strap</a></h6>
-                                    <div class="product_price"><span class="price"><ins>$45.00</ins></span></div>
-                                    <div class="rating"><div class="product_rate" style="width:92%"></div></div>
-                                </div>
-                            </li>
+                            {% for product in newAdd %}
+                                
+                                <li>
+                                    <div class="post_img">
+                                    <a href="{{path('image_show', {'id': product.id})}}" class="blog_link">
+                                    {% if app.request.attributes.get('_route')=='index' %} 
+                                        {% for image in product.images %}
+        
+                                        <div class="container col md5">
+                                            <img src="{{asset('/uploads/' ~ image.link)}}" alt="article" width="50" , height="50"> 
+                                       
+        
+                                        </div>
+        
+                                        {% endfor %} 
+                                    {% endif %}
+        
+                                </a>
+                                    </div>
+                                    <div class="post_content">
+                                        <h6><a href="#">{{product.name}}</a></h6>
+                                        <div class="product_price"><span class="price"><del> ${{35.00 + product.price}}</del><ins>$ {{product.price}}</ins></span></div>
+                                        <div class="rating"><div class="product_rate" style="width:80%"></div></div>
+                                    </div>
+                                </li>
+                            {% endfor %}
+                            
                         </ul>
                     </div>
                     <div class="widget widget_tags">

@@ -2,14 +2,14 @@
 
 namespace App\Controller;
 
-use App\Entity\Coupons;
-use App\Form\CouponsType;
-use App\Repository\CouponsRepository;
-use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Doctrine\ORM\EntityManagerInterface;
+use App\Repository\CouponsRepository;
+use App\Form\CouponsType;
+use App\Entity\Coupons;
 
 /**
  * @Route("/coupons")
@@ -36,6 +36,7 @@ class CouponsController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $coupon->setStatus(true);
             $entityManager->persist($coupon);
             $entityManager->flush();
 

@@ -3,20 +3,17 @@
 namespace App\Form;
 
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\SubmitButtonTypeInterface;
-use Symfony\Component\Form\SubmitButton;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\AbstractType;
-use App\Entity\Coupons;
 
-class CouponsType extends AbstractType
+class CheckCouponType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('code')
-            ->add('value')
+            ->add('code',TextType::class)
             ->add('Appliquez', SubmitType::class)
         ;
     }
@@ -24,7 +21,7 @@ class CouponsType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => Coupons::class,
+            // Configure your form options here
         ]);
     }
 }

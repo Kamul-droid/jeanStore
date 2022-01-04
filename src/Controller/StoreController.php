@@ -21,7 +21,10 @@ use App\Repository\ProductsRepository;
 use App\Repository\ProductQtyRepository;
 use App\Repository\OrdersRepository;
 use App\Repository\CouponsRepository;
+use App\Repository\CategoriesRepository;
+use App\Form\ProductSearchType;
 use App\Form\CouponsType;
+use App\Form\CheckCouponType;
 use App\Entity\Products;
 use App\Entity\ProductQty;
 use App\Entity\Orders;
@@ -42,15 +45,33 @@ class StoreController extends AbstractController
      * 
      * @Route("/{page<\d+>?1}", name="index")
      */
-    public function index( ProductsRepository $prod ,SessionInterface $session, $page=1): Response
+    public function index(CategoriesRepository $categorie, Request $request, ProductsRepository $prod ,SessionInterface $session, $page=1): Response
     {   
         //navigation entre les pages
-        $limit = 2;
+        $limit = 15;
         $start = $page*$limit-$limit;
         $total = count($prod->findAll());
         $pages = ceil($total/$limit);
         // les produits à afficher
-        $allproducts = $prod->findBy([],[],$limit,$start);
+        $allproducts = $prod->findBy([],['created_at' => 'desc'],$limit,$start);
+        $newAdd =  $prod->findBy([],['created_at' => 'desc'],5,0);
+        // les categories à afficher
+        $allCategories = $categorie->findAll();
+        //indicateur de la navigation 
+        $indicateur = [$start, $start+$limit, $total];
+
+        //Search command
+        $form = $this->createForm(ProductSearchType::class);
+        
+        $search = $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()){
+            // On recherche les annonces correspondant aux mots clés
+            $allproducts = $prod->search(
+                $search->get('mots')->getData(),
+                $search->get('categorie')->getData()
+            );
+        }
 
          // on initialise la session pour le cart
 
@@ -93,7 +114,11 @@ class StoreController extends AbstractController
             "cartData"=>$cartData,
              "total" => $total,
             "pages" =>$pages,
-            "page"=>$page
+            "page"=>$page,
+            "form"=> $form->createView(),
+            "newAdd"=>$newAdd,
+            "categories"=>$allCategories,
+            "indicateur"=>$indicateur
         ]);
     }
 
@@ -157,8 +182,8 @@ class StoreController extends AbstractController
     public function cart( ProductsRepository $prod, SessionInterface $session, CouponsRepository $reduce, Request $request ): Response
     {    
         //formulaire pour récuperer les codes coupons
-        $promo = new Coupons();
-        $form = $this->createForm(CouponsType::class, $promo);
+       
+        $form = $this->createForm(CheckCouponType::class);
 
         // on initialise la session pour le cart
 
@@ -180,20 +205,20 @@ class StoreController extends AbstractController
 
         // validation du coupon
 
-        $form ->handleRequest($request);
+        $result = $form ->handleRequest($request);
         $this->value = 0;
         $subTotal = 0;
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $data = $form->getData();
-
+            
             // Vérification du code saisie
-            $submitCode = $data->getCode();
+            $submitCode  = $result->get("code")->getData();
+            
             $allPromo = $reduce -> findAll();
 
             foreach($allPromo as $cp){
                 if ($cp ->getCode() == $submitCode && $cp->getStatus() ) {
-                    $this->value = ($total *$cp ->getValue());
+                    $this->value = ($total *$cp ->getValue())/100;
                 } else {
                    $this->addFlash(
                       'warning',
@@ -303,7 +328,9 @@ class StoreController extends AbstractController
             $Prod = $product->find($id);
             // Ajout du produit à la table commande;
             $order->addProduct($Prod);
-            // Collecte de la quantité de produit commandé
+            //update quantity produit
+            $Prod->setQuantity( $Prod->getQuantity() - $quantity);
+            // Collecte de la quantité commandé par produit acheté
             $qtyInfo = new ProductQty();
             $qtyInfo->setOrderId($order);
             $qtyInfo->setProduct($Prod);

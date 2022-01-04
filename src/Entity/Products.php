@@ -9,6 +9,8 @@ use App\Repository\ProductsRepository;
 
 /**
  * @ORM\Entity(repositoryClass=ProductsRepository::class)
+ * @ORM\Table(name="products", indexes={@ORM\Index(columns={"name"}, flags={"fulltext"})})
+ *
  */
 class Products
 {
@@ -29,10 +31,7 @@ class Products
      */
     private $name;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $category;
+    
 
     /**
      * @ORM\Column(type="integer")
@@ -61,11 +60,14 @@ class Products
      */
     private $productQties;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Categories::class, inversedBy="products")
+     */
+    private $categorie;
+
    
 
-    
-
-    
+   
 
     public function __construct()
     {
@@ -105,17 +107,7 @@ class Products
         return $this;
     }
 
-    public function getCategory(): ?string
-    {
-        return $this->category;
-    }
-
-    public function setCategory(string $category): self
-    {
-        $this->category = $category;
-
-        return $this;
-    }
+   
 
     public function getQuantity(): ?int
     {
@@ -229,6 +221,20 @@ class Products
 
         return $this;
     }
+
+    public function getCategorie(): ?Categories
+    {
+        return $this->categorie;
+    }
+
+    public function setCategorie(?Categories $categorie): self
+    {
+        $this->categorie = $categorie;
+
+        return $this;
+    }
+
+  
 
     
 }

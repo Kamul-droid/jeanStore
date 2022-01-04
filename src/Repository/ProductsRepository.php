@@ -2,9 +2,9 @@
 
 namespace App\Repository;
 
-use App\Entity\Products;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use App\Entity\Products;
 
 /**
  * @method Products|null find($id, $lockMode = null, $lockVersion = null)
@@ -17,6 +17,25 @@ class ProductsRepository extends ServiceEntityRepository
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Products::class);
+    }
+
+    /**
+     * Recherche les annonces en fonction du formulaire
+     * @return void 
+     */
+    public function search($mots = null, $categorie = null){
+        $query = $this->createQueryBuilder('p');
+        $query->where('p.quantity > 0');
+        if($mots != null){
+            $query->andWhere('MATCH_AGAINST(p.name) AGAINST (:mots boolean)>0')
+                ->setParameter('mots', $mots);
+        }
+        if($categorie != null){
+            $query->leftJoin('p.categorie', 'c');
+            $query->andWhere('c.id = :id')
+                ->setParameter('id', $categorie);
+        }
+        return $query->getQuery()->getResult();
     }
 
     // /**

@@ -4,24 +4,25 @@ namespace App\Form;
 
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\SearchType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
-use App\Entity\Products;
 use App\Entity\Categories;
 
-class ProductsType extends AbstractType
+class ProductSearchType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('price')
-            ->add('name')
-            ->add('quantity')
-            ->add('image',FileType::class,['label'=>false,
-            'multiple'=>true,
-            'mapped'=>false,
-            'required'=>false])
+            ->add('mots', SearchType::class, [
+                'label' => false,
+                'attr' => [
+                    'class' => 'form-control',
+                    'placeholder' => 'Entrez un ou plusieurs mots-clés'
+                ],
+                'required' => false
+            ])
             ->add('categorie', EntityType::class, [
                 'class' => Categories::class,
                 'label' => false,
@@ -31,14 +32,18 @@ class ProductsType extends AbstractType
                 ],
                 'required' => false
             ])
-            
+            ->add('Rechercher', SubmitType::class, [
+                'attr' => [
+                    'class' => 'btn primary ti-search',
+                ]
+            ])
         ;
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => Products::class,
+            // Configure your form options here
         ]);
     }
 }
