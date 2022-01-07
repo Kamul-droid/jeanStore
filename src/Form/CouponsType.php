@@ -17,7 +17,7 @@ class CouponsType extends AbstractType
         $builder
             ->add('code')
             ->add('value')
-            ->add('Appliquez', SubmitType::class)
+           
         ;
     }
 

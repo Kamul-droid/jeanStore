@@ -3,37 +3,42 @@
 {% block title %}Coupons index{% endblock %}
 
 {% block body %}
+<section class="container">
+
     <h1>Coupons index</h1>
+    <div class="container">
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Code</th>
-                <th>Value</th>
-                <th>Status</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for coupon in coupons %}
-            <tr>
-                <td>{{ coupon.id }}</td>
-                <td>{{ coupon.code }}</td>
-                <td>{{ coupon.value }}</td>
-                <td>{{ coupon.status ? 'Yes' : 'No' }}</td>
-                <td>
-                    <a href="{{ path('coupons_show', {'id': coupon.id}) }}">show</a>
-                    <a href="{{ path('coupons_edit', {'id': coupon.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="5">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
-    <a href="{{ path('coupons_new') }}">Create new</a>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Code</th>
+                    <th>Value</th>
+                    <th>Status</th>
+                    <th>actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for coupon in coupons %}
+                <tr>
+                    <td>{{ coupon.id }}</td>
+                    <td>{{ coupon.code }}</td>
+                    <td>{{ coupon.value }}</td>
+                    <td>{{ coupon.status ? 'Yes' : 'No' }}</td>
+                    <td>
+                        <a href="{{ path('coupons_show', {'id': coupon.id}) }}">show</a>
+                        <a href="{{ path('coupons_edit', {'id': coupon.id}) }}">edit</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="5">no records found</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    
+        <a class="btn btn-primary" href="{{ path('coupons_new') }}">Create new</a>
+    </div>
+</section>
 {% endblock %}

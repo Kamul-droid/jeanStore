@@ -3,9 +3,14 @@
 {% block title %}New Coupons{% endblock %}
 
 {% block body %}
-    <h1>Create new Coupons</h1>
+<section class="container">
+    <div class="container">
 
-    {{ include('coupons/_form.html.twig') }}
-
-    <a href="{{ path('coupons_index') }}">back to list</a>
+        <h1>Create new Coupons</h1>
+        
+        {{ include('coupons/_form.html.twig') }}
+        
+        <a class="btn btn-primary" href="{{ path('coupons_index') }}">back to list</a>
+    </div>
+</section>
 {% endblock %}
