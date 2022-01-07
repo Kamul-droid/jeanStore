@@ -62,28 +62,7 @@ class OrdersController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/new", name="orders_new", methods={"GET", "POST"})
-     */
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
-    {
-        $order = new Orders();
-        $form = $this->createForm(Orders1Type::class, $order);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->persist($order);
-            $entityManager->flush();
-
-            return $this->redirectToRoute('orders_index', [], Response::HTTP_SEE_OTHER);
-        }
-
-        return $this->render('orders/new.html.twig', [
-            'order' => $order,
-            'form' => $form->createView(),
-        ]);
-    }
-
+   
     /**
      * @Route("/{id}", name="orders_show", methods={"GET"})
      */
@@ -92,26 +71,6 @@ class OrdersController extends AbstractController
         
         return $this->render('orders/show.html.twig', [
             'order' => $order,
-        ]);
-    }
-
-    /**
-     * @Route("/{id}/edit", name="orders_edit", methods={"GET", "POST"})
-     */
-    public function edit(Request $request, Orders $order, EntityManagerInterface $entityManager): Response
-    {
-        $form = $this->createForm(Orders1Type::class, $order);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->flush();
-
-            return $this->redirectToRoute('orders_index', [], Response::HTTP_SEE_OTHER);
-        }
-
-        return $this->render('orders/edit.html.twig', [
-            'order' => $order,
-            'form' => $form->createView(),
         ]);
     }
 
