@@ -3,52 +3,57 @@
 {% block title %}Users{% endblock %}
 
 {% block body %}
-    <h1>Users</h1>
+<section class="container">
+    <div class="container">
+    
+        <h1>{% trans %}Users{% endtrans %}</h1>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ user.id }}</td>
-            </tr>
-            <tr>
-                <th>Email</th>
-                <td>{{ user.email }}</td>
-            </tr>
-            <tr>
-                <th>Roles</th>
-                <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
-            </tr>
-            <tr>
-                <th>Password</th>
-                <td>{{ user.password }}</td>
-            </tr>
-            <tr>
-                <th>FirstName</th>
-                <td>{{ user.firstName }}</td>
-            </tr>
-            <tr>
-                <th>LastName</th>
-                <td>{{ user.lastName }}</td>
-            </tr>
-            <tr>
-                <th>Billing</th>
-                <td>{{ user.billing }}</td>
-            </tr>
-            <tr>
-                <th>Shipping</th>
-                <td>{{ user.shipping }}</td>
-            </tr>
-            <tr>
-                <th>Rgpd</th>
-                <td>{{ user.rgpd }}</td>
-            </tr>
-        </tbody>
-    </table>
+        <table class="table table-responsive">
+            <tbody>
+                <tr>
+                    <th>Id</th>
+                    <td>{{ user.id }}</td>
+                </tr>
+                <tr>
+                    <th>Email</th>
+                    <td>{{ user.email }}</td>
+                </tr>
+                <tr>
+                    <th>Roles</th>
+                    <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
+                </tr>
+                <tr>
+                    <th>Password</th>
+                    <td>{{ user.password }}</td>
+                </tr>
+                <tr>
+                    <th>FirstName</th>
+                    <td>{{ user.firstName }}</td>
+                </tr>
+                <tr>
+                    <th>LastName</th>
+                    <td>{{ user.lastName }}</td>
+                </tr>
+                <tr>
+                    <th>Billing</th>
+                    <td>{{ user.billing }}</td>
+                </tr>
+                <tr>
+                    <th>Shipping</th>
+                    <td>{{ user.shipping }}</td>
+                </tr>
+                <tr>
+                    <th>Rgpd</th>
+                    <td>{{ user.rgpd }}</td>
+                </tr>
+            </tbody>
+        </table>
 
-    <a href="{{ path('users_index') }}">back to list</a>
+        <a class="btn btn-primary" href="{{ path('users_index') }}">back to list</a>
 
-    <a href="{{ path('users_edit', {'id': user.id}) }}">edit</a>
+        <a class="btn btn-primary" href="{{ path('users_edit', {'id': user.id}) }}">edit</a>
 
-    {{ include('users/_delete_form.html.twig') }}
+        {{ include('users/_delete_form.html.twig') }}
+    </div>
+</section>
 {% endblock %}

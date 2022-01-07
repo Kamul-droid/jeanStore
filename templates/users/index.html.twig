@@ -3,47 +3,52 @@
 {% block title %}Users index{% endblock %}
 
 {% block body %}
-    <h1>Users index</h1>
+<section>
+    <div class="container">
+        <h1>{% trans %}Users{% endtrans %}</h1>
+        
+        <table class="table table-responsive table-hover">
+            <thead>
+                <tr>
+                    <th>{% trans %}Id{% endtrans %}</th>
+                    <th>{% trans %}Email{% endtrans %}</th>
+                    <th>{% trans %}Roles{% endtrans %}</th>
+                    <th>{% trans %}Password{% endtrans %}</th>
+                    <th>{% trans %}FirstName{% endtrans %}</th>
+                    <th>{% trans %}LastName{% endtrans %}</th>
+                    <th>{% trans %}Billing{% endtrans %}</th>
+                    <th>{% trans %}Shipping{% endtrans %}</th>
+                    <th>{% trans %}Rgpd{% endtrans %}</th>
+                    <th>{% trans %}actions{% endtrans %}</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for user in users %}
+                <tr>
+                    <td>{{ user.id }}</td>
+                    <td>{{ user.email }}</td>
+                    <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
+                    <td>{{ user.password }}</td>
+                    <td>{{ user.firstName }}</td>
+                    <td>{{ user.lastName }}</td>
+                    <td>{{ user.billing }}</td>
+                    <td>{{ user.shipping }}</td>
+                    <td>{{ user.rgpd }}</td>
+                    <td>
+                        <a href="{{ path('users_show', {'id': user.id}) }}">show</a>
+                        <a href="{{ path('users_edit', {'id': user.id}) }}">edit</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="10">no records found</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Email</th>
-                <th>Roles</th>
-                <th>Password</th>
-                <th>FirstName</th>
-                <th>LastName</th>
-                <th>Billing</th>
-                <th>Shipping</th>
-                <th>Rgpd</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for user in users %}
-            <tr>
-                <td>{{ user.id }}</td>
-                <td>{{ user.email }}</td>
-                <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
-                <td>{{ user.password }}</td>
-                <td>{{ user.firstName }}</td>
-                <td>{{ user.lastName }}</td>
-                <td>{{ user.billing }}</td>
-                <td>{{ user.shipping }}</td>
-                <td>{{ user.rgpd }}</td>
-                <td>
-                    <a href="{{ path('users_show', {'id': user.id}) }}">show</a>
-                    <a href="{{ path('users_edit', {'id': user.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="10">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+        <a class="btn btn-primary" href="{{ path('users_new') }}">{% trans %}Create new{% endtrans %}</a>
+    </div>
 
-    <a href="{{ path('users_new') }}">Create new</a>
+</section>
 {% endblock %}

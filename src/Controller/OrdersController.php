@@ -26,18 +26,14 @@ class OrdersController extends AbstractController
      */
     public function index(OrdersRepository $ordersRepository): Response
     { 
-        // $allOrder = $ordersRepository->findAll();
-        // foreach ($allOrder as $key => $value) {
-            
-        //     foreach (($value->getProductQties()) as $key => $value) {
-        //         dump($value);
-        //     };
-        // }
+        
         return $this->render('orders/index.html.twig', [
             'orders' => $ordersRepository->findAll(),
         ]);
     }
+
     /**
+     * @param mixed $orders, $user
      * @Route("/user", name="user_order", methods={"GET"})
      */
     public function userOrd(UsersRepository $userep, OrdersRepository $repo): Response
@@ -46,14 +42,19 @@ class OrdersController extends AbstractController
         $orders = $repo->findAll();
         
 
-        //tri des résultats
+        //On selctionne les informations concernant uniquement l'utilisateur connecté
         $userOrder = [] ;
 
         foreach ($orders as $key => $value) {
-            //dump($value);
+            
             //On compare l'id utilisateur de la table commande et l'id de l'utilisateur authentifié
-            if ($value->getUser()->getId() == $userInfo->getId() ) {
-                $userOrder [ $key] = $value;
+            
+            if ($userInfo != Null ) {
+               
+                if ($value->getUser()->getId() == $userInfo->getId() ) {
+                    $userOrder [ $key] = $value;
+                }
+                
             }
         }
         return $this->render('orders/index.html.twig', [
@@ -136,6 +137,8 @@ class OrdersController extends AbstractController
     }
 
     /**
+     * @param mixed $orders $pdfOptions
+     * //Pdf creation
      * @Route("/pdf/{id}", name="orders_pdf", methods={"GET"})
      */
     public function pdFile(Orders $order): Response

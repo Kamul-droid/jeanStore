@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file source-language="fr" target-language="fr" datatype="plaintext" original="file.ext">
+    <header>
+      <tool tool-id="symfony" tool-name="Symfony"/>
+    </header>
+    <body>
+      <trans-unit id="UzFhc1Y" resname="Accueil">
+        <source>Accueil</source>
+        <target>Main</target>
+      </trans-unit>
+      <trans-unit id="fvJoLZ." resname="Mes commandes">
+        <source>Mes commandes</source>
+        <target>Orders</target>
+      </trans-unit>
+      <trans-unit id="K1w9JnI" resname="Contact">
+        <source>Contact</source>
+        <target>Contact</target>
+      </trans-unit>
+      <trans-unit id="HbxlzO1" resname="Commande">
+        <source>Commande</source>
+        <target>Commande</target>
+      </trans-unit>
+      <trans-unit id="DL02fX6" resname="Deconnexion">
+        <source>Deconnexion</source>
+        <target>Deconnexion</target>
+      </trans-unit>
+      <trans-unit id="YdaVBBA" resname="Connexion">
+        <source>Connexion</source>
+        <target>Connexion</target>
+      </trans-unit>
+      <trans-unit id="4Tc4LV9" resname="Avertissement : Nos produits sont certifiés 100 % écologiques">
+        <source>Avertissement : Nos produits sont certifiés 100 % écologiques</source>
+        <target>Avertissement : Nos produits sont certifiés 100 % écologiques</target>
+      </trans-unit>
+      <trans-unit id="I5Bg5oy" resname="Accès Rapide">
+        <source>Accès Rapide</source>
+        <target>Accès Rapide</target>
+      </trans-unit>
+      <trans-unit id="VBnBSqW" resname="Qui sommes-nous">
+        <source>Qui sommes-nous</source>
+        <target>Qui sommes-nous</target>
+      </trans-unit>
+      <trans-unit id="7yOllAJ" resname="Retour">
+        <source>Retour</source>
+        <target>Retour</target>
+      </trans-unit>
+      <trans-unit id="zaDyi9y" resname="Dernier Ajout">
+        <source>Dernier Ajout</source>
+        <target>Dernier Ajout</target>
+      </trans-unit>
+      <trans-unit id="iXCS8CL" resname="Un bon look, un bien être au quotidien.">
+        <source>Un bon look, un bien être au quotidien.</source>
+        <target>Un bon look, un bien être au quotidien.</target>
+      </trans-unit>
+      <trans-unit id="niKOxfE" resname="Decembre 20, 2021">
+        <source>Decembre 20, 2021</source>
+        <target>Decembre 20, 2021</target>
+      </trans-unit>
+      <trans-unit id="1udnBrV" resname="Le premier site en matière de mode.">
+        <source>Le premier site en matière de mode.</source>
+        <target>Le premier site en matière de mode.</target>
+      </trans-unit>
+      <trans-unit id="6FEu59A" resname="Conditions Générales d'Utilisation">
+        <source>Conditions Générales d'Utilisation</source>
+        <target>Conditions Générales d'Utilisation</target>
+      </trans-unit>
+      <trans-unit id="v0GXavh" resname="Politiques de Confidentialités">
+        <source>Politiques de Confidentialités</source>
+        <target>Politiques de Confidentialités</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

@@ -2,18 +2,20 @@
 
 namespace App\Controller;
 
-use App\Entity\Users;
-use App\Form\UsersType;
-use App\Repository\UsersRepository;
-use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Doctrine\ORM\EntityManagerInterface;
+use App\Repository\UsersRepository;
+use App\Form\UsersType;
+use App\Form\RegistrationFormType;
+use App\Entity\Users;
 
 /**
  * @Route("/users")
  */
+
 class UsersController extends AbstractController
 {
     /**

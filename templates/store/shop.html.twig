@@ -8,7 +8,7 @@
 
 
 <!-- START SECTION BREADCRUMB -->
-<section class="breadcrumb_section page-title-light background_bg bg_fixed overlay_bg_blue_70" data-img-src="assets/images/breadcrumb_bg2.jpg">
+<section class="breadcrumb_section page-title-light background_bg bg_fixed overlay_bg_blue_70" data-img-src="{{ asset('deco/assets/images/breadcrumb_bg2.jpg') }}">
 	<div class="container">
     	<div class="row align-items-center">
         	<div class="col-sm-12 text-center">
@@ -17,9 +17,9 @@
                 </div>
                 <nav aria-label="breadcrumb">
                   <ol class="breadcrumb justify-content-center">
-                    <li class="breadcrumb-item"><a href="#">Home</a></li>
-                    <li class="breadcrumb-item"><a href="#">Shop</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Shop List</li>
+                    <li class="breadcrumb-item"><a href="#">{% trans %}Home{% endtrans %}</a></li>
+                    <li class="breadcrumb-item"><a href="#">{% trans %}Shop{% endtrans %}</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">{% trans %}Shop List {% endtrans %}</li>
                   </ol>
                 </nav>
             </div>
@@ -35,17 +35,9 @@
         	<div class="col-lg-9">
             	<div class="row align-items-center justify-content-between pb-1 mb-4">
                 	<div class="col-auto">
-                    	<span class="align-middle">Showing {{indicateur[0]+1}} - {{indicateur[1]}} of {{indicateur[2]}} results</span>
+                    	<span class="align-middle">{% trans %}Showing  {% endtrans %}{{indicateur[0]+1}} - {{indicateur[1]}} of {{indicateur[2]}} results</span>
                     </div>
-                    <div class="col-auto">
-                    	<div class="custom_select">
-                    	<select>
-                        	<option value="default">Default sorting</option>
-                            <option value="popularity">Sort by popularity</option>
-                            <option value="date">Sort by newness</option>
-                        </select>
-                        </div>
-                    </div>
+                    
                 </div>
                 <div class="row shop_container grid_view">
                     {% for product in products %}
@@ -53,7 +45,7 @@
                 
                         <div class="col-lg-4 col-sm-6">
                             <div class="product">
-                                <span class="pr_flash">Sale</span>
+                                <span class="pr_flash">{% trans %}Sale{% endtrans %}</span>
                                 <div class="product_img">
                                 
                                     <a href="{{path('image_show', {'id': product.id})}}" class="blog_link">
@@ -74,7 +66,7 @@
                 
                                     <div class="product_action_box">
                                         <ul class="list_none pr_action_btn">
-                                            <li><a href="{{path('cart_add', {'id': product.id})}}" class="btn btn-default rounded-0">Add To Cart</a></li>
+                                            <li><a href="{{path('cart_add', {'id': product.id})}}" class="btn btn-default rounded-0">{% trans %}Add To Cart{% endtrans %}</a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -109,7 +101,7 @@
                 
                     </div>
                     <div class="widget widget_categories">
-                    	<h5 class="widget_title">Categories</h5>
+                    	<h5 class="widget_title">{% trans %} Categories {% endtrans %}</h5>
                         <ul class="border_bottom_dash">
                             {% for cat in categories %}
                                 
@@ -120,7 +112,7 @@
                     </div>
                    
                     <div class="widget">
-                        <h5 class="widget_title">Recent Items</h5>
+                        <h5 class="widget_title">{% trans %} Recent Items {% endtrans %}</h5>
                         <ul class="recent_post border_bottom_dash list_none">
                             {% for product in newAdd %}
                                 
@@ -154,25 +146,24 @@
                     <div class="widget widget_tags">
                     	<h5 class="widget_title">tags</h5>
                         <div class="tags">
-                        	<a href="#">Gym</a>
-                            <a href="#">Fitness</a>
-                            <a href="#">Cardio</a>
+                        	<a href="#">{% trans %}Slim {% endtrans %}</a>
+                            <a href="#">{% trans %}Fitness{% endtrans %}</a>
+                            <a href="#"> {% trans %} Old school {% endtrans %}</a>
 
-                            <a href="#">Cycling</a>
-                            <a href="#">Workout</a>
+    
                         </div>
                     </div>
                     <div class="widget widget_instagram">
-                    	<h5 class="widget_title">Instagram Feeds</h5>
+                    	<h5 class="widget_title">{% trans %}Instagram Feeds{% endtrans %}</h5>
                         <ul class="list_none instafeed">
-                            <li><a href="#"><img src="assets/images/insta_img1.jpg" alt="insta_img"><span class="insta_icon"><i class="ti-instagram"></i></span></a></li>
-                            <li><a href="#"><img src="assets/images/insta_img2.jpg" alt="insta_img"><span class="insta_icon"><i class="ti-instagram"></i></span></a></li>
-                            <li><a href="#"><img src="assets/images/insta_img3.jpg" alt="insta_img"><span class="insta_icon"><i class="ti-instagram"></i></span></a></li>
-                            <li><a href="#"><img src="assets/images/insta_img4.jpg" alt="insta_img"><span class="insta_icon"><i class="ti-instagram"></i></span></a></li>
-                            <li><a href="#"><img src="assets/images/insta_img5.jpg" alt="insta_img"><span class="insta_icon"><i class="ti-instagram"></i></span></a></li>
-                            <li><a href="#"><img src="assets/images/insta_img6.jpg" alt="insta_img"><span class="insta_icon"><i class="ti-instagram"></i></span></a></li>
-                            <li><a href="#"><img src="assets/images/insta_img7.jpg" alt="insta_img"><span class="insta_icon"><i class="ti-instagram"></i></span></a></li>
-                            <li><a href="#"><img src="assets/images/insta_img8.jpg" alt="insta_img"><span class="insta_icon"><i class="ti-instagram"></i></span></a></li>
+                            <li><a href="#"><img src="{{asset('deco/assets/images/insta_img1.jpg')}}" alt="insta_img"><span class="insta_icon"><i class="ti-instagram"></i></span></a></li>
+                            <li><a href="#"><img src="{{asset('deco/assets/images/insta_img2.jpg')}}" alt="insta_img"><span class="insta_icon"><i class="ti-instagram"></i></span></a></li>
+                            <li><a href="#"><img src="{{asset('deco/assets/images/insta_img3.jpg')}}" alt="insta_img"><span class="insta_icon"><i class="ti-instagram"></i></span></a></li>
+                            <li><a href="#"><img src="{{asset('deco/assets/images/insta_img4.jpg')}}" alt="insta_img"><span class="insta_icon"><i class="ti-instagram"></i></span></a></li>
+                            <li><a href="#"><img src="{{asset('deco/assets/images/insta_img5.jpg')}}" alt="insta_img"><span class="insta_icon"><i class="ti-instagram"></i></span></a></li>
+                            <li><a href="#"><img src="{{asset('deco/assets/images/insta_img6.jpg')}}" alt="insta_img"><span class="insta_icon"><i class="ti-instagram"></i></span></a></li>
+                            <li><a href="#"><img src="{{asset('deco/assets/images/insta_img7.jpg')}}" alt="insta_img"><span class="insta_icon"><i class="ti-instagram"></i></span></a></li>
+                            <li><a href="#"><img src="{{asset('deco/assets/images/insta_img8.jpg')}}" alt="insta_img"><span class="insta_icon"><i class="ti-instagram"></i></span></a></li>
                         </ul>
                     </div>
                 </div>

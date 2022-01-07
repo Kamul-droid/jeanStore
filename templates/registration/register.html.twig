@@ -3,23 +3,83 @@
 {% block title %}Register{% endblock %}
 
 {% block body %}
-    <section class="container">
+
+<section>
     
-    <h1>Register</h1>
+    <div class="container align-items-center" data-animation="fadeInUp" data-animation-delay="0.2s">
+    <h1 >{% trans %}Register{% endtrans %}</h1>
+        <div class="col-auto">
+            <div class="field_form icon_form">
+                {{ form_start(registrationForm) }}
+                <div class="align-middle">
+                    <div class="form-group col-lg-12">
+                        <div class="form-input">
+                            <span> <i class="ti-user"></i></span> 
+                            {{ form_widget(registrationForm.firstName,{'attr':{'class':'form-control', 'placeholder':"Entrer votre nom* ",'required':'required', 'id':'civilite'}})
+                            }}
 
-    {{ form_start(registrationForm) }}
-        {{ form_row(registrationForm.firstName) }}
-        {{ form_row(registrationForm.lastName) }}
-        {{ form_row(registrationForm.email) }}
-        {{ form_row(registrationForm.plainPassword, {
-            label: 'Password'
-        }) }}
-        {{ form_row(registrationForm.billing) }}
-        {{ form_row(registrationForm.shipping) }}
+                        </div>
+                    </div>
+                    <div class="form-group col-lg-12">
+                        <div class="form-input">
+                            <span><i class="ti-author"></i> </span>
+                            {{ form_widget(registrationForm.lastName,{'attr':{'class':'form-control', 'placeholder':"Entrer votre prenom *",'required':'required', 'id':'prenom'}})
+                            }}
 
-        {{ form_row(registrationForm.rgpd) }}
+                        </div>
+                    </div>
+                    <div class="form-group col-lg-12">
+                        <div class="form-input">
+                            <span><i class="ti-email"></i> </span>
+                            {{ form_widget(registrationForm.email,{'attr':{'class':'form-control', 'placeholder':"Entrer votre email *",'required':'required', 'id':'email'}})
+                            }}
 
-        <button type="submit" class="btn">Register</button>
-    {{ form_end(registrationForm) }}
+                        </div>
+                    </div>
+                    <div class="form-group col-lg-12">
+                        <div class="form-input">
+                            <span><i class="ti-password"></i> </span>
+                            {{ form_widget(registrationForm.plainPassword,{'attr':{'class':'form-control', 'placeholder':"Entrer votre mot de passe *",'required':'required', 'id':'password'}})
+                            }}
+
+                        </div>
+                    </div>
+                    <div class="form-group col-lg-12">
+                        <div class="form-input">
+                            <span><i class="ti-add"></i> </span>
+                            {{ form_widget(registrationForm.billing,{'attr':{'class':'form-control', 'placeholder':"Entrer votre adresse de facturation *",'required':'required', 'id':'billing'}})
+                            }}
+
+                        </div>
+                    </div>
+                    <div class="form-group col-lg-12">
+                        <div class="form-input">
+                            <span><i class=""></i> </span>
+                            {{ form_widget(registrationForm.shipping,{'attr':{'class':'form-control', 'placeholder':"Entrer votre adresse de livraison *",'required':'required', 'id':'shipping'}})
+                            }}
+
+                        </div>
+                    </div>
+                    <div class=" col-lg-4">
+                        <div class="custom-control custom-checkbox">
+                            {{ form_label(registrationForm.rgpd, 'Rgpd') }}
+                            <span><i class=""></i> Conditions générales d'utilisation</span>
+                            {{ form_widget(registrationForm.rgpd,{'attr':{'class':' ', 'placeholder':"",'required':'required', 'id':'rgpd', 'type':'checkbox'}})
+                            }}
+
+                        </div>
+                    </div>
+                    
+                
+                        
+                    <button type="submit" class="btn btn-primary">{% trans %}Register{% endtrans %}</button>
+                    {{ form_end(registrationForm) }}
+                </div>
+            </div>
+        </div>
+    </div>
 </section>
+    
+    
+
 {% endblock %}

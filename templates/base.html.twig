@@ -82,9 +82,9 @@
         <div class="container">
             <nav class="navbar navbar-expand-lg">
                 <a class="navbar-brand" href="{{ path('index') }}">
-                    {# <img class="logo_light" src="{{ asset('deco/assets/images/#') }}" alt="logo" />
-                    <img class="logo_dark" src="{{ asset('deco/assets/images/#') }}" alt="logo" />
-                    <img class="logo_default" src="{{ asset('deco/assets/images/#') }}" alt="logo" /> #}
+                    <img class="logo_light" src="{{ asset('deco/assets/images/logo_white.png') }}" alt="logo" />
+                    <img class="logo_dark" src="{{ asset('deco/assets/images/logo_white.png') }}" alt="logo" />
+                    <img class="logo_default" src="{{ asset('deco/assets/images/logo_white.png') }}" alt="logo" />
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"> <span class="ion-android-menu"></span> </button>
                 <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
@@ -95,7 +95,7 @@
                         </li>
                        
                         <li>
-                            <a class="nav-link" href="{{ path('user_order') }}">{% trans %}Mes commandes{% endtrans %} </a>
+                            <a class="nav-link" href="{{ path('user_order') }}">{% trans %} Mes commandes{% endtrans %} </a>
 
                         </li>
                         <li>
@@ -243,7 +243,7 @@
                 <div class="row">
                     <div class="col-lg-3 col-sm-7">
                         <div class="footer_logo">
-                            <a href="index.html"><img alt="logo" src="{#{ asset('deco/assets/images/#') }#}"></a>
+                            <a href="index.html"><img alt="logo" src="{{ asset('deco/assets/images/logo_white.png') }}"></a>
                         </div>
                         <div class="footer_desc">
                             <p>{% trans %} Avertissement : Nos produits sont certifiés 100 % écologiques{%
@@ -293,35 +293,7 @@
                             </li>
                         </ul>
                     </div>
-                    <div class="col-lg-4 col-md-5">
-                        <h5 class="widget_title3">Instagram</h5>
-                        <ul class="list_none instafeed">
-                            {# <li>
-                                <a href="#"><img src="{{ asset('deco/assets/images/insta_img1.jpg') }}" alt="insta_img"><span class="insta_icon"><i class="ti-instagram"></i></span></a>
-                            </li>
-                            <li>
-                                <a href="#"><img src="{{ asset('deco/assets/images/insta_img2.jpg') }}" alt="insta_img"><span class="insta_icon"><i class="ti-instagram"></i></span></a>
-                            </li>
-                            <li>
-                                <a href="#"><img src="{{ asset('deco/assets/images/insta_img3.jpg') }}" alt="insta_img"><span class="insta_icon"><i class="ti-instagram"></i></span></a>
-                            </li>
-                            <li>
-                                <a href="#"><img src="{{ asset('deco/assets/images/insta_img4.jpg') }}" alt="insta_img"><span class="insta_icon"><i class="ti-instagram"></i></span></a>
-                            </li>
-                            <li>
-                                <a href="#"><img src="{{ asset('deco/assets/images/insta_img5.jpg') }}" alt="insta_img"><span class="insta_icon"><i class="ti-instagram"></i></span></a>
-                            </li>
-                            <li>
-                                <a href="#"><img src="{{ asset('deco/assets/images/insta_img6.jpg') }}" alt="insta_img"><span class="insta_icon"><i class="ti-instagram"></i></span></a>
-                            </li>
-                            <li>
-                                <a href="#"><img src="{{ asset('deco/assets/images/insta_img7.jpg') }}" alt="insta_img"><span class="insta_icon"><i class="ti-instagram"></i></span></a>
-                            </li>
-                            <li>
-                                <a href="#"><img src="{{ asset('deco/assets/images/insta_img8.jpg') }}" alt="insta_img"><span class="insta_icon"><i class="ti-instagram"></i></span></a>
-                            </li> #}
-                        </ul>
-                    </div>
+                    
                 </div>
             </div>
         </div>
