@@ -1,0 +1,33 @@
+
+
+<section class="container">
+    {{ form_start(form) }}
+
+    <div class="p-3 mb-2 bg-dark text-light"><center><strong> Prix <br></strong></center></div></a>
+        {{ form_widget(form.price) }} <br><br>
+    <div class="p-3 mb-2 bg-dark text-light"><center><strong> Nom <br></strong></center></div></a>
+        {{ form_widget(form.name) }}  <br><br>
+        <div class="p-3 mb-2 bg-dark text-light"><center><strong> Quantité <br></strong></center></div></a>  
+        {{ form_widget(form.quantity) }}<br><br>
+        <div class="p-3 mb-2 bg-dark text-light"><center><strong> Image <br></strong></center></div></a>
+        {{ form_widget(form.image) }}<br><br><br>
+        <div class="p-3 mb-2 bg-dark text-light"><center><strong> Catégorie <br></strong></center></div></a>
+        {{ form_widget(form.categorie) }}<br><br>
+
+        <center><button class="btn-dark btn">{{ button_label|default('Save') }}</button></center>
+    {{ form_end(form) }}
+     {# Vérifier si la route est " produit" on affiche les images#} {#{% if app.request.attributes.get('_route')=='products_edit' %} #}
+     {#<h2>Images</h2>
+            {% for image in product.images %}
+
+            <div class="container col md5">
+                <img src="{{asset('/uploads/' ~ image.link)}}" alt="article" width="150" , height="150">
+                <div class="btn btn-default">
+                    <a href="{{path('image_delete',{'id':image.id}) }}" data-delete data-token="{{ csrf_token('delete' ~ image.id) }}"> supprimer </a>
+                </div>
+
+            </div>
+
+            {% endfor %} {% endif %}#}
+</section>
+

@@ -1,0 +1,84 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Orders{% endblock %}
+
+{% block body %}
+    <h1>Orders</h1>
+<section class="container">
+
+    <table class="table responsive">
+        <tbody>
+            <tr>
+                <th>Numero de la commande</th>
+                <td>{{ order.id }}</td>
+            </tr>
+            <tr>
+                <th>Client</th>
+                <td>{{ order.user.firstname }}</td>
+            </tr>
+            <tr>
+            <th>Date</th>
+            <td>{{ order.createdAt ? order.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <th>Product</th>
+            <th>Price Units</th>
+            <th>Quantity</th>
+            <th>Total</th>
+            <tr>
+                <td>
+                    <table>
+                        {% for item in order.product %}
+                         <tr>
+                         <td>{{ item.name }} </td> 
+                         {# </tr> #}
+                        {% endfor %}
+                    </table>
+               </td>
+                          
+                <td>
+                    <table>
+                        {% for item in order.product %}
+                        <tr>
+                         <td class="row"> {{ item.price }} </td> 
+                        </tr>
+                         {% endfor %}
+                        </table>
+                
+                </td>
+                           
+                <td>
+                    <table>
+                        {% for item in order.productQties %}
+                        <tr>
+                         <td class="row"> {{ item.quantity }} </td> 
+                        </tr>
+                         {% endfor %}
+                        </table>
+                </td>
+                <td>
+                    {% set price = 0 %}
+                    <table>
+                        {% for item in order.productQties %}
+                        <tr>
+                         <td class="row"> {{ item.quantity * item.product.price }} $</td> 
+                        </tr>
+                         {% set price = price + item.quantity * item.product.price %}
+                         {% endfor %}
+                        </table>
+                </td>
+            </tr>
+            <tr>
+                <th>Total payé</th>
+                <td>{{ price }} $</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('orders_pdf', {'id': order.id}) }}">Generate pdf</a>
+    <a href="{{ path('orders_index') }}">back to list</a>
+
+    <a href="{{ path('orders_edit', {'id': order.id}) }}">edit</a>
+
+    {{ include('orders/_delete_form.html.twig') }}
+</section>
+{% endblock %}
