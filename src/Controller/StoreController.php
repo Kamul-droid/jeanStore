@@ -354,7 +354,7 @@ class StoreController extends AbstractController
 
            $this->addFlash(
             'success',
-            'Merci d\'avoir payer nos produits'
+            'Merci d\'avoir fait des achats avec nous'
 
         );
         $this->del($session);

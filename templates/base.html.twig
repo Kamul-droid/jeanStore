@@ -116,7 +116,7 @@
                                         <a class=" nav-link nav_item " href="{{ path('admin_index') }}">Admin</a>
                                         </li>
                                     {% endif %}
-                                    {% if is_granted('ROLE_EDITOR') %}
+                                    {% if is_granted('ROLE_USER') %}
                                         <li>
                                         <a class=" nav-link nav_item " href="">{{ app.user.username }}</a>  
 
