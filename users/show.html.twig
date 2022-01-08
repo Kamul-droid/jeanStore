@@ -1,0 +1,72 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Users{% endblock %}
+
+{% block body %}
+    <section class="breadcrumb_section page-title-light background_bg bg_fixed overlay_bg_blue_70" data-img-src="{{asset('deco/assets/images/blue5.jpg')}}"> 
+	<div class="container">
+    	<div class="row align-items-center">
+        	<div class="col-sm-12 text-center">
+            	<div class="page-title">
+            		<h2><strong><div class="p-3 mb-2 bg-light text-dark">UTILISATEUR</div></strong></h2>
+                </div>
+                {#<nav aria-label="breadcrumb">
+                  <ol class="breadcrumb justify-content-center">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item"><a href="#">Shop</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Shop List</li>
+                  </ol>
+                </nav>#}
+            </div>
+        </div>
+    </div>
+</section>
+<section class="container">
+    <table class="table table-hover table-dark">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ user.id }}</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>{{ user.email }}</td>
+            </tr>
+            <tr>
+                <th>Roles</th>
+                <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
+            </tr>
+            <tr>
+                <th>Password</th>
+                <td>{{ user.password }}</td>
+            </tr>
+            <tr>
+                <th>FirstName</th>
+                <td>{{ user.firstName }}</td>
+            </tr>
+            <tr>
+                <th>LastName</th>
+                <td>{{ user.lastName }}</td>
+            </tr>
+            <tr>
+                <th>Billing</th>
+                <td>{{ user.billing }}</td>
+            </tr>
+            <tr>
+                <th>Shipping</th>
+                <td>{{ user.shipping }}</td>
+            </tr>
+            <tr>
+                <th>Rgpd</th>
+                <td>{{ user.rgpd }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('users_index') }}"><h2><br><strong><div class="p-3 mb-2 bg-dark text-light"><font size="4"><center>Retourner à la liste</center></font></div><br></strong></h2></a>
+
+    <a href="{{ path('users_edit', {'id': user.id}) }}"><h2><strong><div class="p-3 mb-2 bg-dark text-light"><font size="4"><center>Modifier</center></font></div></strong></h2></a>
+
+    {{ include('users/_delete_form.html.twig') }}
+</section>
+{% endblock %}

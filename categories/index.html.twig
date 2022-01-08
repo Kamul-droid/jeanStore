@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Categories index{% endblock %}
+
+{% block body %}
+
+ <h1> <section class="breadcrumb_section page-title-light background_bg bg_fixed overlay_bg_blue_70" data-img-src="{{asset('deco/assets/images/blue.jpg')}}"> 
+	<div class="container">
+    	<div class="row align-items-center">
+        	<div class="col-sm-12 text-center">
+            	<div class="page-title">
+                    <h2><strong><div class="p-3 mb-2 bg-light text-dark">CATEGORIES</div></strong></h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</section></h1>
+
+
+<section class="container">
+    <table class="table table-hover table-dark">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom de la catégorie</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for category in categories %}
+            <tr>
+                <td>{{ category.id }}</td>
+                <td>{{ category.name}}</td>
+                <td >
+                     <a href="{{ path('categories_show', {'id': category.id}) }}">  <div class="p-3 mb-2 bg-light text-dark"><center><strong>Montrer</strong></center></div></a>
+                    <a href="{{ path('categories_edit', {'id': category.id}) }}">  <div class="p-3 mb-2 bg-light text-dark"><center><strong>Modifier</strong></center></div></a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('categories_new') }}"><div class="p-3 mb-2 bg-light text-dark"><center><strong>Créer Nouveau</strong></center></div></a>
+</section>
+{% endblock %}
