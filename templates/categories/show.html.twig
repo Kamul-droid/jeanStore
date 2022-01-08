@@ -3,24 +3,42 @@
 {% block title %}Categories{% endblock %}
 
 {% block body %}
-    <h1>Categories</h1>
+    <section class="breadcrumb_section page-title-light background_bg bg_fixed overlay_bg_blue_70" data-img-src="{{asset('deco/assets/images/blue5.jpg')}}"> 
+	<div class="container">
+    	<div class="row align-items-center">
+        	<div class="col-sm-12 text-center">
+            	<div class="page-title">
+                    <h2><strong><div class="p-3 mb-2 bg-light text-dark">{% trans %}CATEGORIES{% endtrans %}</div></strong></h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
-    <table class="table">
-        <tbody>
+
+<section class="container">
+    <table class="table table-hover table-dark">
+        <thead>
             <tr>
                 <th>Id</th>
                 <td>{{ category.id }}</td>
             </tr>
+
             <tr>
-                <th>Name</th>
+                <th>{% trans %}Nom de la Catégorie{% endtrans %}</th>
                 <td>{{ category.name }}</td>
             </tr>
+
+        </thead>
+        <tbody>
+
         </tbody>
     </table>
 
-    <a href="{{ path('categories_index') }}">back to list</a>
+    <a href="{{ path('categories_index') }}"><br>  <div class="p-3 mb-2 bg-light text-dark"><center><strong>{% trans %}Retourner à la liste{% endtrans %}</strong></center></div><br></a>
 
-    <a href="{{ path('categories_edit', {'id': category.id}) }}">edit</a>
-
+    <a href="{{ path('categories_edit', {'id': category.id}) }}"> <div class="p-3 mb-2 bg-light text-dark"><center><strong> {% trans %}Modifier{% endtrans %} </strong></center></div><br></a>
     {{ include('categories/_delete_form.html.twig') }}
+
+</section>
 {% endblock %}

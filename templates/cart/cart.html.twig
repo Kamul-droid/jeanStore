@@ -9,7 +9,7 @@
         <div class="row align-items-center">
             <div class="col-sm-12 text-center">
                 <div class="page-title">
-                    <h1>PANIER </h1>
+                    <h1> {% trans %}PANIER{% endtrans %} </h1>
 
                 </div>
 
@@ -23,18 +23,18 @@
         <div class="row">
         	<div class="col-12">    
             	<div class="table-responsive shop_cart_table">
-                	<table class="table">
+                	<table class="table table-hover ">
                     	<thead>
                         	<tr>
                                 <thead>
                    
                 
                             	<th class="product-thumbnail">&nbsp;</th>
-                                <th class="product-name">Produit</th>
-                                <th class="product-price">Prix</th>
-                                <th class="product-quantity">Quantité</th>
+                                <th class="product-name">{% trans %}Produit{% endtrans %}</th>
+                                <th class="product-price">{% trans %}Prix{% endtrans %}</th>
+                                <th class="product-quantity">{% trans %}Quantité{% endtrans %}</th>
                                 <th class="product-subtotal">Total</th>
-                                <th class="product-remove">Supprimer</th>
+                                <th class="product-remove">{% trans %}Supprimer{% endtrans %}</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -46,7 +46,7 @@
                                         {% for image in element.product.images %}
 
                                             <div class="container col md5">
-                                                <img src="{{asset('/uploads/' ~ image.link)}}" alt="produit" width="50" , height="50">                 
+                                                <img src="{{asset('/uploads/' ~ image.link)}}" alt="produit" width="60" , height="60">                 
                                             </div>
 
                                         {% endfor %} 
@@ -70,7 +70,7 @@
                             
                             {% else %}
                             <tr>
-                                <td colspan="5" class="text-center">Votre panier est vide</td>
+                                <td colspan="5" class="text-center">{% trans %}Votre panier est vide{% endtrans %}</td>
                             </tr>
 
                             {% endfor %}
@@ -100,9 +100,9 @@
                                     	
                                         <div class="col-lg-8 col-md-6 text-center text-md-right">
                                             <a href ="{{path("index")}}">
-                                            <button class="btn btn-dark btn-sm" type="submit">boutique</button>
+                                            <button class="btn btn-dark btn-sm" type="submit">{% trans %}boutique{% endtrans %}</button>
                                             </a>
-                                            <a href="{{path("cart_delete_all" )}}" class="btn btn-danger btn-sm">Supprimer le Panier</a>
+                                            <a href="{{path("cart_delete_all" )}}" class="btn btn-danger btn-sm">  {% trans %}Supprimer le Panier{% endtrans %}</a>
                                         </div>
                                     </div>
                                 </td>
@@ -127,11 +127,11 @@
                         <table class="table">
                             <tbody>
                                 <tr>
-                                    <td class="cart_total_label">Sous Total : </td>
+                                    <td class="cart_total_label">{% trans %}Sous Total{% endtrans %} : </td>
                                 <td class="cart_total_amount"> {{subtotal}} <i class= "fa fa-euro-sign"></i> </td>
                             </tr>
                             <tr>
-                                <td class="cart_total_label">Vous avez une réduction de : </td>
+                                <td class="cart_total_label">{% trans %}Vous avez une réduction de{% endtrans %} : </td>
                                 <td class="cart_total_amount"> <i class ="fas fa-minus"></i> {{reduction}} <i class= "fa fa-euro-sign"></i> </td>
                             </tr>
                             <tr>
@@ -146,7 +146,7 @@
                         </table>
                                 <div class="col-lg-12 col-md text-center text-md-right">
                                     {# apres payement on on crée la fiche client#}
-                                    <a href="{{path("checkout" )}}" class="btn btn-default btn-sm">Payer</a>
+                                    <a href="{{path("checkout" )}}" class="btn btn-default btn-sm">{% trans %}Payer{% endtrans %}</a>
                                 </div>
                     </div>
                 </div>

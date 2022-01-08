@@ -1,28 +1,40 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Orders{% endblock %}
+{% block title %}{% trans %}Orders{% endtrans %}{% endblock %}
 
 {% block body %}
-    <h1>Orders</h1>
+<section class="breadcrumb_section page-title-light background_bg bg_fixed overlay_bg_blue_70" data-img-src="{{asset('deco/assets/images/blue5.jpg')}}"> 
+	<div class="container">
+    	<div class="row align-items-center">
+        	<div class="col-sm-12 text-center">
+            	<div class="page-title">
+            		<h2><strong><div class="p-3 mb-2 bg-light text-dark">{% trans %}Orders {% endtrans %}</div></strong></h2>
+
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 <section class="container">
 
-    <table class="table responsive">
+    <table class="table responsive table-dark">
         <tbody>
             <tr>
-                <th>Numero de la commande</th>
+                <th>{% trans %}Numero de la commande{% endtrans %}</th>
                 <td>{{ order.id }}</td>
             </tr>
             <tr>
-                <th>Client</th>
+                <th>{% trans %}Client{% endtrans %}</th>
                 <td>{{ order.user.firstname }}</td>
             </tr>
             <tr>
             <th>Date</th>
             <td>{{ order.createdAt ? order.createdAt|date('Y-m-d H:i:s') : '' }}</td>
             </tr>
-            <th>Product</th>
-            <th>Price Units</th>
-            <th>Quantity</th>
+            <th>{% trans %}Product{% endtrans %}</th>
+            <th>{% trans %}Price Units{% endtrans %}</th>
+            <th>{% trans %}Quantity{% endtrans %}</th>
             <th>Total</th>
             <tr>
                 <td>
@@ -68,17 +80,21 @@
                 </td>
             </tr>
             <tr>
-                <th>Total payé</th>
+                <th>{% trans %}Total payé{% endtrans %}</th>
                 <td>{{ price }} $</td>
             </tr>
         </tbody>
     </table>
-
-    <a href="{{ path('orders_pdf', {'id': order.id}) }}">Generate pdf</a>
-    <a href="{{ path('orders_index') }}">back to list</a>
-
-    <a href="{{ path('orders_edit', {'id': order.id}) }}">edit</a>
-
+    <div class="row col-6">
+        <div class="col-6">
+            <a class="btn btn-primary" href="{{ path('orders_pdf', {'id': order.id}) }}"> <strong>{% trans %}Generate pdf{% endtrans %} </strong></a>
+        </div>
+         <div class="col-6">
+            <a class="btn btn-primary" href="{{ path('orders_index') }}">{% trans %}back to list{% endtrans %}</a>
+        </div>
+    </div>
+    
+    <br>
     {{ include('orders/_delete_form.html.twig') }}
 </section>
 {% endblock %}

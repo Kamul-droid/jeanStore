@@ -13,7 +13,7 @@
     	<div class="row align-items-center">
         	<div class="col-sm-12 text-center">
             	<div class="page-title">
-            		<h1>Shop List</h1>
+            		<h1>{% trans %}Shop List{% endtrans %}</h1>
                 </div>
                 <nav aria-label="breadcrumb">
                   <ol class="breadcrumb justify-content-center">
@@ -35,7 +35,7 @@
         	<div class="col-lg-9">
             	<div class="row align-items-center justify-content-between pb-1 mb-4">
                 	<div class="col-auto">
-                    	<span class="align-middle">{% trans %}Showing  {% endtrans %}{{indicateur[0]+1}} - {{indicateur[1]}} of {{indicateur[2]}} results</span>
+                    	<span class="align-middle">{% trans %}Showing  {% endtrans %}  {{indicateur[0]+1}} - {{indicateur[1]}} {% trans %} of {% endtrans %} {{indicateur[2]}} {% trans %}results{% endtrans %}</span>
                     </div>
                     
                 </div>
@@ -54,7 +54,7 @@
             
                                             <div class="container col md5">
                                                 <img src="{{asset('/uploads/' ~ image.link)}}" alt="article" width="150" , height="150"> 
-                                            {# <a href="{{path('articles_delete_image',{'id':image.id}) }}" data-delete data-token="{{ csrf_token('delete' ~ image.id) }}"> supprimer </a>                        #}
+                                           
             
                                             </div>
             
@@ -146,9 +146,9 @@
                     <div class="widget widget_tags">
                     	<h5 class="widget_title">tags</h5>
                         <div class="tags">
-                        	<a href="#">{% trans %}Slim {% endtrans %}</a>
-                            <a href="#">{% trans %}Fitness{% endtrans %}</a>
-                            <a href="#"> {% trans %} Old school {% endtrans %}</a>
+                        	<a href="#">{% trans %}Enfant {% endtrans %}</a>
+                            <a href="#">{% trans %}Adulte{% endtrans %}</a>
+                            <a href="#"> {% trans %} tendance {% endtrans %}</a>
 
     
                         </div>

@@ -4,31 +4,69 @@ Checkout
 {% endblock %}
 {% block body %}
 <!-- START SECTION BREADCRUMB -->
-<section class="breadcrumb_section page-title-light background_bg overlay_bg_blue_70" data-img-src="{{ asset('deco/assets/images/breadcrumb_bg3.jpg')}}">
+<h1> <section class="breadcrumb_section page-title-light background_bg bg_fixed overlay_bg_blue_70" data-img-src="{{asset('deco/assets/images/blue5.jpg')}}"> 
 	<div class="container">
     	<div class="row align-items-center">
         	<div class="col-sm-12 text-center">
             	<div class="page-title">
-            		<h1>Checkout</h1>
+                    <h2><strong><div class="p-3 mb-2 bg-light text-dark">{% trans %}Vérification{% endtrans %}</div></strong></h2>
                 </div>
-                <nav aria-label="breadcrumb">
-                  <ol class="breadcrumb justify-content-center">
-                    <li class="breadcrumb-item"><a href="#">Home</a></li>
-                    <li class="breadcrumb-item"><a href="#">Shop</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Checkout</li>
-                  </ol>
-                </nav>
             </div>
         </div>
     </div>
-</section>
+</section></h1>
 <!-- END SECTION BREADCRUMB -->
 
 <!-- START SECTION CHECKOUT -->
-<section>
+<section class="container">
     <div class="container">
+    <strong>
     	<div class="row">
-        	
+        	<div class="col-md-6">
+            	<div class="toggle_info">
+                	<span>{% trans %}Returning customer?{% endtrans %} <a href="#loginform" data-toggle="collapse" class="collapsed" aria-expanded="false">{% trans %}Click here to login{% endtrans %}</a></span>
+                </div>
+                <div class="panel-collapse collapse login_form mb-3" id="loginform">
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="form-group col-6">
+                                <a class="btn btn-lg btn-secondary " href="{{ path('app_login') }}"> {% trans %}Login{% endtrans %}</a>
+                            </div>
+                            
+                            <div class="form-group col-6">
+                                <a class="btn btn-lg btn-secondary " href="{{ path('app_register') }}"> {% trans %}Register{% endtrans %}</a>
+                            </div>
+                        </div>
+                            
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+            	<div class="toggle_info">
+            		<span> {% trans %}Have a coupon?{% endtrans %} <a href="#coupon" data-toggle="collapse" class="collapsed" aria-expanded="false">{% trans %}Click here to enter your code{% endtrans %}</a></span>
+                </div>
+                <div class="panel-collapse collapse coupon_form mb-3" id="coupon">
+                    <div class="panel-body">
+                    	<p>{% trans %}If you have a coupon code, please apply it below.{% endtrans %}</p>
+                        <div class="coupon field_form input-group form_style2">
+                            {{form_start(coupon)}}
+                                <div class="row">
+                        
+                                    <div class="coupon field_form input-group">
+                                        
+                                        {{ form_widget(coupon.code,{'attr':{'class':'form-control ', type:'text','placeholder':" Entrer le code du coupon",  'id':'code'}}) }}
+                                        </div> 
+                                    
+                                    </div>
+                                    <div class=" input-group-append">
+                                        {{ form_widget(coupon.Appliquez,{'attr':{'class':'btn btn-dark btn-sm ', type:'','label':"Appliquez le Coupon*",  'id':'submit'}}) }}
+                                    </div> 
+                                </div>
+                            {{form_end(coupon)}}
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
         
         <div class="row">
@@ -39,13 +77,13 @@ Checkout
         <div class="row">
         	<div class="col-12">
             	<div class="heading_s2">
-            		<h5>{% trans %}Your Orders{% endtrans %}</h5>
+            		<h2><strong><center><font size="4"><div class="p-3 mb-2 bg-dark text-light">{% trans %}Votre commande{% endtrans %}</div></font></center></strong></h2>
                 </div>
                 <div class="table-responsive order_table">
                 	<table class="table table-bordered">
                     	<thead>
                         	<tr>
-                                <th>{% trans %}Product{% endtrans %}</th>
+                                <th>{% trans %}Produit{% endtrans %}</th>
                                 <th>Total</th>
                             </tr>
                         </thead>
@@ -97,23 +135,24 @@ Checkout
                 <div class="payment_method">
                     <div class="custome-radio">
                         <input class="form-check-input" required="" type="radio" name="payment_option" id="exampleRadios3" value="option3" checked="">
-                        <label class="form-check-label" for="exampleRadios3"> {% trans %}Direct Bank Transfer{% endtrans %}</label>
-                        <p data-method="option3" class="payment-text">{% trans %}Bank info{% endtrans %} </p>
+                        <label class="form-check-label" for="exampleRadios3">{% trans %}Carte bleue{% endtrans %}</label>
+                        <p data-method="option3" class="payment-text">{% trans %}Le paiement est sécurisé.{% endtrans %}</p>
                     </div>
                     <div class="custome-radio">
                         <input class="form-check-input" type="radio" name="payment_option" id="exampleRadios4" value="option4">
-                        <label class="form-check-label" for="exampleRadios4"> {% trans %}Check Payment{% endtrans %}</label>
-                        <p data-method="option4" class="payment-text">{% trans %}Please send your cheque to Store Name, Store Street, Store Town, Store State / County, Store Postcode.{% endtrans %}</p>
+                        <label class="form-check-label" for="exampleRadios4">{% trans %}Paiement par chèque{% endtrans %}</label>
+                        <p data-method="option4" class="payment-text">{% trans %}Le paiement est sécurisé{% endtrans %}.</p>
                     </div>
                     <div class="custome-radio">
                         <input class="form-check-input" type="radio" name="payment_option" id="exampleRadios5" value="option5">
-                        <label class="form-check-label" for="exampleRadios5">{% trans %}Paypal{% endtrans %}</label>
-                        <p data-method="option5" class="payment-text">{% trans %}Pay via PayPal; you can pay with your credit card if you don't have a PayPal account.{% endtrans %}</p>
+                        <label class="form-check-label" for="exampleRadios5">Paypal</label>
+                        <p data-method="option5" class="payment-text">{% trans %}Le paiement est sécurisé.{% endtrans %}</p>
                     </div>
                 </div>
-                <a href="{{ path('commit') }}" class="btn btn-primary">{% trans %}Place Order{% endtrans %}</a>
+                <a href="{{ path('commit') }}" class="btn btn-dark">{% trans %}Passer la commande{% endtrans %}</a>
             </div>
         </div>
+        </strong>
     </div>
 </section>
 <!-- END SECTION CHECKOUT -->

@@ -49,9 +49,9 @@
             </tbody>
         </table>
 
-        <a class="btn btn-primary" href="{{ path('users_index') }}">back to list</a>
+        <a class="btn btn-primary" href="{{ path('users_index') }}">{% trans %}back to list{% endtrans %}</a>
 
-        <a class="btn btn-primary" href="{{ path('users_edit', {'id': user.id}) }}">edit</a>
+        <a class="btn btn-primary" href="{{ path('users_edit', {'id': user.id}) }}">{% trans %}edit{% endtrans %}</a>
 
         {{ include('users/_delete_form.html.twig') }}
     </div>

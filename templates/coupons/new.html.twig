@@ -3,14 +3,26 @@
 {% block title %}New Coupons{% endblock %}
 
 {% block body %}
-<section class="container">
-    <div class="container">
 
-        <h1>Create new Coupons</h1>
-        
-        {{ include('coupons/_form.html.twig') }}
-        
-        <a class="btn btn-primary" href="{{ path('coupons_index') }}">back to list</a>
+    <section class="breadcrumb_section page-title-light background_bg bg_fixed overlay_bg_blue_70" data-img-src="{{asset('deco/assets/images/blue5.jpg')}}"> 
+	<div class="container">
+    	<div class="row align-items-center">
+        	<div class="col-sm-12 text-center">
+            	<div class="page-title">
+                    <h2><strong><div class="p-3 mb-2 bg-light text-dark">{% trans %}NOUVEAUX COUPONS{% endtrans %}</div></strong></h2>
+                </div>
+            </div>
+        </div>
     </div>
+</section>
+
+<section class = "container">
+    
+    {{ include('coupons/_form.html.twig') }}
+
+    
+
+    <center><a class="btn btn-dark" href="{{ path('coupons_index') }}">{% trans %}back to list{% endtrans %}</a></center>
+    
 </section>
 {% endblock %}

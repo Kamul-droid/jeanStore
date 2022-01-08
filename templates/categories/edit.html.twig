@@ -3,11 +3,23 @@
 {% block title %}Edit Categories{% endblock %}
 
 {% block body %}
-    <h1>Edit Categories</h1>
+
+    <section class="breadcrumb_section page-title-light background_bg bg_fixed overlay_bg_blue_70" data-img-src="{{asset('deco/assets/images/blue.jpg')}}"> 
+	<div class="container">
+    	<div class="row align-items-center">
+        	<div class="col-sm-12 text-center">
+            	<div class="page-title">
+                    <h2><strong><div class="p-3 mb-2 bg-light text-dark">{% trans %}MODIFIER{% endtrans %}</div></strong></h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
     {{ include('categories/_form.html.twig', {'button_label': 'Update'}) }}
 
-    <a href="{{ path('categories_index') }}">back to list</a>
+    <a href="{{ path('categories_index') }}">{% trans %}back to list{% endtrans %}</a>
 
     {{ include('categories/_delete_form.html.twig') }}
 {% endblock %}
+

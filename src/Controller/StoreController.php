@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use Symfony\Component\Validator\Constraints\Time;
 use Symfony\Component\Validator\Constraints\Date;
+use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\HttpFoundation\Response;
@@ -370,14 +371,24 @@ class StoreController extends AbstractController
     /**
      * @Route("checkout", name="checkout")
      */
-    public function checkout(SessionInterface $session, ProductsRepository $prod): Response
+    public function checkout(SessionInterface $session,CouponsRepository $reduce, ProductsRepository $prod, Request $request,AuthenticationUtils $authenticationUtils): Response
     {
         $cart = $session->get("shoppingCart",[]);
+        $form = $this->createForm(CheckCouponType::class);
+
+        // validation du coupon
+
+        $result = $form ->handleRequest($request);
+        $this->value = 0;
+        $subTotal = 0;
+        $total = 0 ;
+
+        
+
 
         //On fabrique les données
         $cartData = [];
-        $total = 0 ;
-
+       
         foreach ($cart as $id => $qty){
             $product = $prod -> find($id);
             $cartData [] = [
@@ -388,12 +399,42 @@ class StoreController extends AbstractController
             $total +=$product->getPrice()*$qty;
         }
 
+        if ($form->isSubmitted() && $form->isValid()) {
+            
+            // Vérification du code saisie
+            $submitCode  = $result->get("code")->getData();
+            
+            $allPromo = $reduce -> findAll();
+
+            foreach($allPromo as $cp){
+                if ($cp ->getCode() == $submitCode && $cp->getStatus() ) {
+                    $this->value = ($total *$cp ->getValue())/100;
+                } else {
+                   $this->addFlash(
+                      'warning',
+                      'Votre code n\'est pas valide'
+                   );
+                }
+                
+            }
+
+        }
+
         $subTotal = $total;
         $total -= $this->value;
 
-       
+        //login
+        if ($this->getUser()) {
+            $this->addFlash(
+                'sucess',
+                'Vous êtes connecté'
+             );
+            //return $this->redirectToRoute('checkout');
+        }
+        
 
-        return $this->render('cart/checkout.html.twig', ["cartData"=>$cartData, "subtotal" => $subTotal, "total" => $total]);
+       
+        return $this->render('cart/checkout.html.twig', ["cartData"=>$cartData, "subtotal" => $subTotal, "total" => $total, "coupon"=> $form->createView(),]);
     }
        
     

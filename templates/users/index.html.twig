@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Users index{% endblock %}
+{% block title %} Users {% endblock %}
 
 {% block body %}
 <section>
@@ -41,7 +41,7 @@
                 </tr>
             {% else %}
                 <tr>
-                    <td colspan="10">no records found</td>
+                    <td colspan="10">{% trans %}no records found{% endtrans %}</td>
                 </tr>
             {% endfor %}
             </tbody>
